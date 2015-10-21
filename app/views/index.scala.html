@@ -1,7 +1,19 @@
-@(message: String)
+@(message: String)(content: Html)
 
-@main("Welcome to Play") {
-
-    @play20.welcome(message, style = "Java")
-
+@main("Minesweeper") {
+  @content
+  <br />
+  <form action="command/cell" method="get">
+    <fieldset><legend>
+      Input fiedls
+    </legend>
+      <label for="cell">Cell</label>
+      <input type="text" name="cell">
+      <!--
+      <label for="newGame">New Game</label>
+      <input type="text" name="newGame">
+      <br />-->
+      <input type="submit" name="submit" value="Send Form" />
+    </fieldset>
+  </form>
 }

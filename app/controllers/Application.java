@@ -19,13 +19,13 @@ public class Application extends Controller {
     public Result index() {
     	String str = controller.getField();
     	text = new Html(str);
-        return ok(views.html.main.render("Minesweeper", text));
+        return ok(views.html.index.render("Minesweeper", text));
     }
 
     public Result commandline(String command) {
     	Minesweeper.getInstance().getTui().processInputLine(command);
     	String str = controller.getField();
     	text = new Html(str);
-    	return ok(views.html.main.render("Minesweeper", text));
+    	return ok(views.html.index.render("Minesweeper", text));
     }
 }
