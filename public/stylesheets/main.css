@@ -1,3 +1,10 @@
+#content-wrap{
+    margin-top: 30px;
+    margin-bottom: 50px;
+    margin-right: 20%;
+    margin-left: 30px;
+    background-color: #f2f2f2;
+}
 body {
   background-color: #f2f2f2;
     font-family: "Lato";
@@ -14,7 +21,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: "Raleway";
     font-weight: 300;
-    color: #333;
+    color: #ad2b2b;
 }
 
 
@@ -32,7 +39,7 @@ p {
 a {
     color: #3bc492;
     word-wrap: break-word;
-
+    font-size: 10px;
     -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
     -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
     -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
@@ -63,6 +70,14 @@ a:after {
     border-top: 1px solid #ccc;
     margin: 1em 0;
     padding: 0;
+}
+
+blockquote {
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 

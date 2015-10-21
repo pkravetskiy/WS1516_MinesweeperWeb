@@ -14,18 +14,19 @@ import de.htwg.se.util.observer.IObserver;
 import views.html.*;
 
 public class Application extends Controller {
-	static IController controller = new de.htwg.se.controller.impl.Controller(new Field());
-	private Html text = new Html("<h1>QWERTZ</h1>");
-    public Result index() {
-    	String str = controller.getField();
-    	text = new Html(str);
-        return ok(views.html.index.render("Minesweeper", text));
-    }
+	private Minesweeper minesweeper = Minesweeper.getInstance();
 
-    public Result commandline(String command) {
-    	Minesweeper.getInstance().getTui().processInputLine(command);
-    	String str = controller.getField();
-    	text = new Html(str);
-    	return ok(views.html.index.render("Minesweeper", text));
-    }
+  public Result index() {
+  	String str = minesweeper.getTui().getField();
+  	Html text = new Html(str);
+      return ok(views.html.index.render("Minesweeper", text));
+  }
+
+  public Result commandline(String command) {
+  	minesweeper.getTui().processInputLine(command);
+
+  	String str = minesweeper.getTui().getField();
+  	Html text = new Html(str);
+  	return ok(views.html.index.render(command, text));
+  }
 }

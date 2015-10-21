@@ -1,5 +1,5 @@
-New log file opened at Wed Oct 21 13:29:10 CEST 2015 by 4644@3dlab11
-jvm 4644@3dlab11
+New log file opened at Wed Oct 21 15:01:40 CEST 2015 by 7524@3dlab11
+jvm 7524@3dlab11
 jvm vmName=Java HotSpot(TM) 64-Bit Server VM vmVendor=Oracle Corporation vmVersion=25.60-b23
 jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.8
 jvm arguments: [-Xms256m, -Xmx1024m, -XX:MetaspaceSize=64m, -XX:MaxMetaspaceSize=256m]
@@ -27,7 +27,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
 [Loading] Done in Z:\git\MinesweeperWeb\project, returning: (minesweeperweb-build)
 Loading project definition from Z:\git\MinesweeperWeb\project
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@c90f542, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@48810f04, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -73,4 +73,4 @@ Waiting for socket thread
 Waiting for request processor thread
 Waiting for command engine result
 Returning control to sbt launcher with result Exit(0)
-Closing the 4644@3dlab11 logs at Wed Oct 21 13:29:17 CEST 2015, goodbye.
+Closing the 7524@3dlab11 logs at Wed Oct 21 15:01:48 CEST 2015, goodbye.
