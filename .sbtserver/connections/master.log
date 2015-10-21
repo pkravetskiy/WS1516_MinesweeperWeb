@@ -1,0 +1,34 @@
+New log file opened at Wed Oct 21 12:01:53 CEST 2015 by 2316@3dlab11
+Taking next connection to: 49611
+New client attempting to connect on port: 49612-49611
+  Address = /141.37.31.61:49611
+This client on port 49612 has uuid 07ee99ce-c6a2-4bcc-b8d9-c73888d31af2 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-07ee99ce-c6a2-4bcc-b8d9-c73888d31af2
+Taking next connection to: 49611
+New client attempting to connect on port: 49613-49611
+  Address = /141.37.31.61:49611
+Handshake exception on socket: 49613
+sbt.impl.ipc.HandshakeException: Unable to perform handshake
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
+	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
+	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
+Caused by: java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.io.BufferedInputStream.fill(Unknown Source)
+	at java.io.BufferedInputStream.read(Unknown Source)
+	at java.io.DataInputStream.readInt(Unknown Source)
+	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
+	... 2 more
+Taking next connection to: 49611
+New client attempting to connect on port: 49614-49611
+  Address = /141.37.31.61:49611
+This client on port 49614 has uuid 8c7b7bd8-a57b-464c-9cd7-326e82e088ac configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-07ee99ce-c6a2-4bcc-b8d9-c73888d31af2, activator-8c7b7bd8-a57b-464c-9cd7-326e82e088ac
+Taking next connection to: 49611
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 49611

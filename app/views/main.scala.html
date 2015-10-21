@@ -1,0 +1,29 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+        <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
+    </head>
+    <body>
+        @content
+        <br />
+        <form action="index.html" method="get">
+          <fieldset><legend>
+            Input fiedls
+          </legend>
+            <label for="cell">Cell</label>
+            <input type="text" name="cell">
+            <br /><!--
+            <label for="newGame">New Game</label>
+            <input type="text" name="newGame">
+            <br />-->
+            <input type="submit" name="submit" value="Send Form" />
+          </fieldset>
+        </form>
+    </body>
+</html>
