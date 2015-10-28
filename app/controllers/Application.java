@@ -18,6 +18,7 @@ public class Application extends Controller {
 
   public Result index() {
   	String str = minesweeper.getTui().getField();
+		System.out.println(str);
   	Html text = new Html(str);
       return ok(views.html.index.render("Minesweeper", text));
   }
@@ -29,4 +30,8 @@ public class Application extends Controller {
   	Html text = new Html(str);
   	return ok(views.html.index.render(command, text));
   }
+
+	public Result about() {
+		return ok(views.html.about.render());
+	}
 }

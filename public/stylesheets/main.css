@@ -39,7 +39,7 @@ p {
 a {
     color: #3bc492;
     word-wrap: break-word;
-    font-size: 10px;
+    font-size: 20px;
     -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
     -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
     -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
@@ -80,10 +80,44 @@ blockquote {
     margin-right: 40px;
 }
 
-
+span {
+    display: inline-block;
+    min-width: 30px;
+    border-style: outset;
+}
 /* ==========================================================================
    Wrap Sections
    ========================================================================== */
+
+.Mine {
+  color: #c0392b;
+  border-style: inset;
+  /*border-width: 5px;*/
+  /*padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;*/
+}
+
+.Numbers {
+  /*padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;*/
+  border-style: inset;
+  /*border-width: 5px;*/
+  color: #3bc492;
+}
+
+.Unrevealed {
+  /*padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;*/
+  /*border-style: groove;*/
+  /*border-width: 5px;*/
+  color: #555;
+}
 
 #headerwrap {
 	background-color: #34495e;
