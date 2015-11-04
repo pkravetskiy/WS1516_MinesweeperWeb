@@ -6,7 +6,7 @@
     background-color: #f2f2f2;
 }
 body {
-  background-color: #f2f2f2;
+    background-color: #f2f2f2;
     font-family: "Lato";
     font-weight: 300;
     font-size: 16px;
@@ -17,8 +17,27 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
+.bla {
+    padding: 5px 20px;
+    background: #a1b9b3;
+    border: 1px solid;
+    border-color: #a1b9b3 #000000 #000000 #a1b9b3;
+    text-decoration: none;
+    font-weight: bold;
+    color: #000000;
+}
+
 /* Titles */
-h1, h2, h3, h4, h5, h6 {
+h1 {
+  text-shadow: 0 0 5px #dd9090, 0 0 10px #dd9090,
+             0 0 20px #dd9090, 0 0 30px #dd9090,
+             0 0 40px #dd9090;
+  font-family: "Raleway";
+  font-weight: 100;
+  font-size: 80px;
+  color: #ad2b2b;
+}
+h2, h3, h4, h5, h6 {
     font-family: "Raleway";
     font-weight: 300;
     color: #ad2b2b;
@@ -80,14 +99,20 @@ blockquote {
     margin-right: 40px;
 }
 
-span {
+/*span {
     display: inline-block;
     min-width: 30px;
     border-style: outset;
-}
+}*/
 /* ==========================================================================
    Wrap Sections
    ========================================================================== */
+
+.Span {
+       display: inline-block;
+       min-width: 30px;
+       border-style: outset;
+   }
 
 .Mine {
   color: #c0392b;
@@ -117,6 +142,16 @@ span {
   /*border-style: groove;*/
   /*border-width: 5px;*/
   color: #555;
+}
+
+#keyboard {
+    margin: 50px auto;
+    width: 794px;
+    height: 315px;
+    background: #D5D9DC url("keyboard-background.jpg") repeat-x scroll 0% 0%;
+    border-radius: 7px 7px 10px 10px / 21px 21px 10px 10px;
+    padding: 50px 0px 0px 10px;
+    box-shadow: 0px 0px 8px #BBB inset, 0px 1px 0px #AAA, 0px 4px 0px #BBB, 0px 10px 30px #DDD;
 }
 
 #headerwrap {

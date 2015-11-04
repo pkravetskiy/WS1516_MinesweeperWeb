@@ -1,25 +1,32 @@
-@(message: String)(content: Html)
+@(message: String, controller:de.htwg.se.controller.IController)
 
 @main("Minesweeper") {
-  <center>@content
-
+  <center><h1>Minesweeper</h1>
+    <ul>
+    @for(line <- 1 until controller.getPlayingField.getLines){
+      <li>
+      @for(col <- 1 until controller.getPlayingField.getColumns){
+        <a href="/command/cell?cell=0@line-0@col">@controller.getPlayingField().getCell(line, col)</a>
+      }
+      </li>
+    }
+    </ul>
   <p>
     @message
   </p>
   <br />
-  <span>
+<div class="row">
+  <div class="col-­‐md-­‐4">
   <form action="/command/cell" method="get" >
-    <fieldset><legend>
-      Input fiedls
-    </legend>
-      <label for="cell">Cell</label>
-      <input type="text" name="cell">
-      <!--
-      <label for="newGame">New Game</label>
-      <input type="text" name="newGame">
-      <br />-->
-      <input type="submit" name="submit" value="Send Form" />
-    </fieldset>
-  </form></span><br />
-  <a href="/about">About Minesweeper</a></center>
+      <div class="input-group">
+        <input type="text" name="cell" class="form-control">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Go!</button>
+        </span>
+      </div>
+  </form><br />
+    </div>
+</div>
+
+  <a href="/about">About Minesweeper</a>
 }

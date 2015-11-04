@@ -15,20 +15,24 @@ import views.html.*;
 
 public class Application extends Controller {
 	private Minesweeper minesweeper = Minesweeper.getInstance();
-
+	private IController controller = minesweeper.getTui().getController();
   public Result index() {
-  	String str = minesweeper.getTui().getField();
-		System.out.println(str);
-  	Html text = new Html(str);
-      return ok(views.html.index.render("Minesweeper", text));
+  	// String str = controller.getFieldHTML();
+		// System.out.println(str);
+  	// Html text = new Html(str);
+    return ok(views.html.index.render("Minesweeper", controller));
   }
 
   public Result commandline(String command) {
   	minesweeper.getTui().processInputLine(command);
-
-  	String str = minesweeper.getTui().getField();
-  	Html text = new Html(str);
-  	return ok(views.html.index.render(command, text));
+		if (controller.isVictory()) {
+			command = "Victory!";
+		} else if (controller.isGameOver()) {
+			command = "Game Over!";
+		} else {
+			command = "You typed: " + command;
+		}
+  	return ok(views.html.index.render(command, controller));
   }
 
 	public Result about() {
