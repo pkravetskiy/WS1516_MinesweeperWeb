@@ -1,12 +1,61 @@
 @(message: String, controller:de.htwg.se.controller.IController)
 
 @main("Minesweeper") {
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button> -->
+        <a class="navbar-brand" href="/"><img alt="Brand" height="20" width="20" src="@routes.Assets.versioned("images/minesweeper_icon.png")"></a>
+        <a class="navbar-brand" href="/">Minesweeper</a>
+      </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">New Game<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/command/cell?cell=n">Restart</a></li>
+            <li><a href="/command/cell?cell=sS">Small</a></li>
+            <li><a href="/command/cell?cell=sM">Medium</a></li>
+            <li><a href="/command/cell?cell=sL">Large</a></li>
+          </ul>
+        </li>
+        <li><a href="/command/cell?cell=u">Undo</a></li>
+        <li><a href="/command/cell?cell=r">Redo</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+  </nav>
+
+
   <center><h1>Minesweeper</h1>
-    <ul>
+
+    <ul style="list-style-type:none">
     @for(line <- 1 until controller.getPlayingField.getLines){
       <li>
       @for(col <- 1 until controller.getPlayingField.getColumns){
-        <a href="/command/cell?cell=0@line-0@col">@controller.getPlayingField().getCell(line, col)</a>
+        <span class="Span">
+        @if(line < 10 && col < 10){
+          <a href="/command/cell?cell=0@line-0@col">@controller.getPlayingField().getCell(line, col)</a>
+        } else {
+          @if(line < 10 && col >= 10) {
+            <a href="/command/cell?cell=0@line-@col">@controller.getPlayingField().getCell(line, col)</a>
+          } else {
+            @if(line >= 10 && col < 10) {
+              <a href="/command/cell?cell=@line-0@col">@controller.getPlayingField().getCell(line, col)</a>
+            } else {
+              <a href="/command/cell?cell=@line-@col">@controller.getPlayingField().getCell(line, col)</a>
+            }
+          }
+        }
+        </span>
       }
       </li>
     }
@@ -14,19 +63,13 @@
   <p>
     @message
   </p>
-  <br />
-<div class="row">
-  <div class="col-­‐md-­‐4">
-  <form action="/command/cell" method="get" >
-      <div class="input-group">
-        <input type="text" name="cell" class="form-control">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">Go!</button>
-        </span>
-      </div>
-  </form><br />
-    </div>
-</div>
 
-  <a href="/about">About Minesweeper</a>
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container">
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/license">License</a></li>
+      <li><a href="/authors">Authors</a></li>
+    </ul>
+  </div>
+</nav>
 }

@@ -38,4 +38,12 @@ public class Application extends Controller {
 	public Result about() {
 		return ok(views.html.about.render());
 	}
+
+	public Result license() {
+		return ok(views.html.license.render());
+	}
+
+	public Result authors() {
+		return ok(views.html.authors.render());
+	}
 }
