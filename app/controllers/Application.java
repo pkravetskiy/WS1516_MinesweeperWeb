@@ -17,9 +17,6 @@ public class Application extends Controller {
 	private Minesweeper minesweeper = Minesweeper.getInstance();
 	private IController controller = minesweeper.getTui().getController();
   public Result index() {
-  	// String str = controller.getFieldHTML();
-		// System.out.println(str);
-  	// Html text = new Html(str);
     return ok(views.html.index.render("Minesweeper", controller));
   }
 
