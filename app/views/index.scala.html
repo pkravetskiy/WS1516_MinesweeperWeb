@@ -5,12 +5,6 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        </button> -->
         <a class="navbar-brand" href="/"><img alt="Brand" height="20" width="20" src="@routes.Assets.versioned("images/minesweeper_icon.png")"></a>
         <a class="navbar-brand" href="/">Minesweeper</a>
       </div>
@@ -35,23 +29,27 @@
   </nav>
 
 
-  <center><h1>Minesweeper</h1>
+  <center>
+    <h1>Minesweeper</h1>
+    <ul id="qwerty" style="list-style-type:none">
+        @if(controller.isGameOver()) {<script>alert('Game Over!')</script>}
+        @if(controller.isVictory()) {<script>alert('Victory!')</script>}
 
-    <ul style="list-style-type:none">
     @for(line <- 1 until controller.getPlayingField.getLines){
       <li>
       @for(col <- 1 until controller.getPlayingField.getColumns){
+          @{val value = controller.getPlayingField().getCell(line, col);}
         <span class="Span">
         @if(line < 10 && col < 10){
-          <a href="/command/cell?cell=0@line-0@col">@controller.getPlayingField().getCell(line, col)</a>
+          <a class="key" href="/command/cell?cell=0@line-0@col"><span>@controller.getPlayingField().getCell(line, col)</span></a>
         } else {
           @if(line < 10 && col >= 10) {
-            <a href="/command/cell?cell=0@line-@col">@controller.getPlayingField().getCell(line, col)</a>
+            <a class="key" href="/command/cell?cell=0@line-@col"><span>@controller.getPlayingField().getCell(line, col)</span></a>
           } else {
             @if(line >= 10 && col < 10) {
-              <a href="/command/cell?cell=@line-0@col">@controller.getPlayingField().getCell(line, col)</a>
+              <a class="key" href="/command/cell?cell=@line-0@col"><span>@controller.getPlayingField().getCell(line, col)</span></a>
             } else {
-              <a href="/command/cell?cell=@line-@col">@controller.getPlayingField().getCell(line, col)</a>
+              <a class="key" href="/command/cell?cell=@line-@col"><span>@controller.getPlayingField().getCell(line, col)</span></a>
             }
           }
         }
@@ -63,11 +61,12 @@
   <p>
     @message
   </p>
-
+</center>
   <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container">
     <ul class="nav navbar-nav navbar-right">
       <li><a href="/license">License</a></li>
+      <li><a href="https://github.com/pkravetskiy/WS1516_MinesweeperWeb">Github</a></li>
       <li><a href="/authors">Authors</a></li>
     </ul>
   </div>
