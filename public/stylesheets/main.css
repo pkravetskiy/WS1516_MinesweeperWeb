@@ -18,12 +18,12 @@ body {
 
 .key{
 	display: block;
-	color: #aaa;
+	color: #ad2b2b;
 	font: bold 9pt arial;
 	text-decoration: none;
 	text-align: center;
-	width: 44px;
-	height: 41px;
+	width: 40px;
+	height: 40px;
 	margin: 3px;
 	background: #eff0f2;
 	-moz-border-radius: 4px;

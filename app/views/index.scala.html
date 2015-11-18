@@ -41,15 +41,15 @@
           @{val value = controller.getPlayingField().getCell(line, col);}
         <span class="Span">
         @if(line < 10 && col < 10){
-          <a class="key" href="/command/cell?cell=0@line-0@col"><span>@controller.getPlayingField().getCell(line, col)</span></a>
+          <a class="key" href="/command/cell?cell=0@line-0@col"><span id="@line-@col"></span></a>
         } else {
           @if(line < 10 && col >= 10) {
-            <a class="key" href="/command/cell?cell=0@line-@col"><span>@controller.getPlayingField().getCell(line, col)</span></a>
+            <a class="key" href="/command/cell?cell=0@line-@col"><span id="@line-@col"></span></a>
           } else {
             @if(line >= 10 && col < 10) {
-              <a class="key" href="/command/cell?cell=@line-0@col"><span>@controller.getPlayingField().getCell(line, col)</span></a>
+              <a class="key" href="/command/cell?cell=@line-0@col"><span id="@line-@col"></span></a>
             } else {
-              <a class="key" href="/command/cell?cell=@line-@col"><span>@controller.getPlayingField().getCell(line, col)</span></a>
+              <a class="key" href="/command/cell?cell=@line-@col"><span id="@line-@col"></span></a>
             }
           }
         }
