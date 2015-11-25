@@ -1,11 +1,38 @@
 @(message: String, controller:de.htwg.se.controller.IController)
 
 @main("Minesweeper") {
+  <script language="JavaScript">
+
+  </script>
+  <script language="JavaScript">
+    function sendClick(row,column) {
+      if (row < 10 && column < 10) {
+        $.post("/json/0" + row + "-0" + column);
+      } else if (row < 10 && column >= 10) {
+        $.post("/json/0" + row + "-" + column);
+      } else if (row >= 10 && column < 10) {
+        $.post("/json/" + row + "-0" + column);
+      } else {
+        $.post("/json/" + row + "-" + column);
+      }
+      // updateField();
+    }
+    function updateField() {
+      var i;
+      var j;
+      var value;
+      for (i = 1; i <= @controller.getPlayingField().getLines(); i++) {
+        for (j = 1; j <= @controller.getPlayingField().getLines(); j++) {
+          document.getElementById(i + "-" + j).innerHTML = value;
+        }
+      }
+    }
+  </script>
 
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/"><img alt="Brand" height="20" width="20" src="@routes.Assets.versioned("images/minesweeper_icon.png")"></a>
+        <a class="navbar-brand" href="/"><img alt="Brand" height="20" width="20" src="@routes.Assets.at("images/minesweepericon.png")"></a>
         <a class="navbar-brand" href="/">Minesweeper</a>
       </div>
 
@@ -35,24 +62,32 @@
         @if(controller.isGameOver()) {<script>alert('Game Over!')</script>}
         @if(controller.isVictory()) {<script>alert('Victory!')</script>}
 
-    @for(line <- 1 until controller.getPlayingField.getLines){
+    @for(line <- 1 until controller.getPlayingField.getLines + 1){
       <li>
-      @for(col <- 1 until controller.getPlayingField.getColumns){
-          @{val value = controller.getPlayingField().getCell(line, col);}
+      @for(col <- 1 until controller.getPlayingField.getColumns + 1){
         <span class="Span">
-        @if(line < 10 && col < 10){
-          <a class="key" href="/command/cell?cell=0@line-0@col"><span id="@line-@col"></span></a>
-        } else {
-          @if(line < 10 && col >= 10) {
-            <a class="key" href="/command/cell?cell=0@line-@col"><span id="@line-@col"></span></a>
+          <a href="/" onclick="sendClick(@line, @col)"
+          @if(controller.getPlayingField.getCell(line, col).isRevealed) {
+              class="key not_active"
           } else {
-            @if(line >= 10 && col < 10) {
-              <a class="key" href="/command/cell?cell=@line-0@col"><span id="@line-@col"></span></a>
-            } else {
-              <a class="key" href="/command/cell?cell=@line-@col"><span id="@line-@col"></span></a>
-            }
-          }
-        }
+            class="key"
+          }>
+            <span class="Span" id="@line-@col">
+              @if(!controller.getPlayingField.getCell(line, col).isRevealed) {
+                  &nbsp;
+              } else {
+                @if(controller.getPlayingField.getCell(line, col).getValue() == 0) {
+                    &nbsp;
+                } else {
+                  @if(controller.getPlayingField.getCell(line, col).getValue() == -1) {
+                    <img class="Mine" align="middle" height="27" width="27" src="@routes.Assets.at("images/minesweepericon.png")">
+                  } else {
+                    @controller.getPlayingField.getCell(line, col).getValue()
+                  }
+                }
+              }
+            </span>
+          </a>
         </span>
       }
       </li>
@@ -65,7 +100,7 @@
   <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container">
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="/license">License</a></li>
+      <li><a href="/license" >License</a></li>
       <li><a target="_blank" href="https://github.com/pkravetskiy/WS1516_MinesweeperWeb">Github</a></li>
       <li><a href="/authors">Authors</a></li>
     </ul>
