@@ -7,9 +7,9 @@ GET     /                           controllers.Application.index()
 GET     /about                      controllers.Application.about()
 GET     /license                    controllers.Application.license()
 GET     /authors                    controllers.Application.authors()
-GET 	  /command/cell		            controllers.Application.commandline(cell:String)
-POST    /json/:command              controllers.Application.jsonCommand(command:String)
 GET     /json                       controllers.Application.json()
+GET     /greeter                    controllers.Application.sockHandler()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

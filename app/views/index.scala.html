@@ -2,31 +2,35 @@
 
 @main("Minesweeper") {
   <script language="JavaScript">
+  //Create a new socket
+  $(function() {
+    var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
+    sock = new WS("@routes.Application.sockHandler().webSocketURL(request)")
 
-  </script>
-  <script language="JavaScript">
-    function sendClick(row,column) {
-      if (row < 10 && column < 10) {
-        $.post("/json/0" + row + "-0" + column);
-      } else if (row < 10 && column >= 10) {
-        $.post("/json/0" + row + "-" + column);
-      } else if (row >= 10 && column < 10) {
-        $.post("/json/" + row + "-0" + column);
-      } else {
-        $.post("/json/" + row + "-" + column);
-      }
-      // updateField();
+    sock.onmessage = function(event) {
+      //Nothing for the moment
     }
-    function updateField() {
-      var i;
-      var j;
-      var value;
-      for (i = 1; i <= @controller.getPlayingField().getLines(); i++) {
-        for (j = 1; j <= @controller.getPlayingField().getLines(); j++) {
-          document.getElementById(i + "-" + j).innerHTML = value;
-        }
-      }
+
+    $('button.send').click(function() {
+      sock.send("I'm sending a message now.")
+    });
+  })
+  //Function for Minesweeper buttons
+  function sendClick(row,column) {
+    if (row < 10 && column < 10) {
+      sock.send("0" + row + "-0" + column);
+    } else if (row < 10 && column >= 10) {
+      sock.send("0" + row + "-" + column);
+    } else if (row >= 10 && column < 10) {
+      sock.send(row + "-0" + column);
+    } else {
+      sock.send(row + "-" + column);
     }
+  }
+  //Function for Navbar
+  function sendNav(command) {
+    sock.send(command);
+  }
   </script>
 
   <nav class="navbar navbar-default">
@@ -41,20 +45,19 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">New Game<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/command/cell?cell=n">Restart</a></li>
-            <li><a href="/command/cell?cell=sS">Small</a></li>
-            <li><a href="/command/cell?cell=sM">Medium</a></li>
-            <li><a href="/command/cell?cell=sL">Large</a></li>
+            <li><a href="/" onclick="sendNav('n')">Restart</a></li>
+            <li><a href="/" onclick="sendNav('sS')">Small</a></li>
+            <li><a href="/" onclick="sendNav('sM')">Medium</a></li>
+            <li><a href="/" onclick="sendNav('sL')">Large</a></li>
           </ul>
         </li>
-        <li><a href="/command/cell?cell=u">Undo</a></li>
-        <li><a href="/command/cell?cell=r">Redo</a></li>
+        <li><a href="/" onclick="sendNav('u')">Undo</a></li>
+        <li><a href="/" onclick="sendNav('r')">Redo</a></li>
         <li><a href="/about">About</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
   </nav>
-
 
   <center>
     <h1>&nbsp;&nbsp;Minesweeper</h1>
