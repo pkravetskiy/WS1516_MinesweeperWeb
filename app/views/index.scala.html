@@ -63,7 +63,7 @@
         @if(controller.isVictory()) {<script>alert('Victory!')</script>}
 
     @for(line <- 1 until controller.getPlayingField.getLines + 1){
-      <li>
+      <li><div style="white-space: nowrap">
       @for(col <- 1 until controller.getPlayingField.getColumns + 1){
         <span class="Span">
           <a href="/" onclick="sendClick(@line, @col)"
@@ -90,7 +90,7 @@
           </a>
         </span>
       }
-      </li>
+      </div></li>
     }
     </ul>
   <p>
