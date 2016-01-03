@@ -1,2 +1,12 @@
-
-<button type="button">{{column.value}}</button>
+<span>
+  <button class="key not_active" type="button">
+    <span ng-if="column.value == 0">
+      <!-- code to render a large video block-->
+      </br>
+    </span>
+    <span ng-if="column.value != 0">
+      <!-- code to render the regular video block -->
+      {{column.value}}
+    </span>
+  </button>
+</span>

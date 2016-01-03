@@ -57,8 +57,8 @@ public class Application extends Controller {
 		for (int i=0; i < x; i++) {
 			for (int j=0; j < y; j++) {
 				field[i][j] = new HashMap<String, Object>();
-				field[i][j].put("value", new Integer(controller.getPlayingField().getCell(i, j).getValue()));
-				field[i][j].put("isrevealed", new Boolean(controller.getPlayingField().getCell(i, j).isRevealed()));
+				field[i][j].put("value", new Integer(controller.getPlayingField().getCell(i+1, j+1).getValue()));
+				field[i][j].put("isrevealed", new Boolean(controller.getPlayingField().getCell(i+1, j+1).isRevealed()));
 			}
 		}
 
