@@ -1,8 +1,7 @@
 package controllers;
 
 import play.data.Form;
-import play.mvc.Controller;
-import play.mvc.Result;
+import play.mvc.*;
 import play.twirl.api.Html;
 import de.htwg.se.minesweeper.Minesweeper;
 import de.htwg.se.aview.gui.PlayingFieldPanel;
@@ -15,6 +14,8 @@ import views.html.*;
 import play.libs.Json;
 import java.util.Map;
 import java.util.HashMap;
+import akka.actor.*;
+import play.libs.F.*;
 
 public class Application extends Controller {
 	private Minesweeper minesweeper = Minesweeper.getInstance();
@@ -48,11 +49,6 @@ public class Application extends Controller {
 		return ok(views.html.authors.render());
 	}
 
-	public Result jsonCommand(String command) {
-			minesweeper.getTui().processInputLine(command);
-			return json();
-	}
-
 	public Result json() {
 		int x = controller.getPlayingField().getLines();
 		int y = controller.getPlayingField().getColumns();
@@ -73,4 +69,22 @@ public class Application extends Controller {
 
 		return ok(Json.stringify(Json.toJson(json)));
 	}
+
+	public WebSocket<String> sockHandler() {
+      return new WebSocket<String>() {
+          // called when the websocket is established
+          public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
+              // register a callback for processing instream events
+              in.onMessage(new Callback<String>() {
+                  public void invoke(String event) {
+										System.out.println(event);
+										minesweeper.getTui().processInputLine(event);
+                  }
+               });
+
+              // write out a greeting
+              out.write("I'm contacting you regarding your recent websocket.");
+          }
+      };
+  }
 }
