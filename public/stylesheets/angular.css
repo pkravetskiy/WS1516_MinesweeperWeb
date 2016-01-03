@@ -10,7 +10,7 @@ h1 {
 }
 
 .key{
-  float:left;
+  style="display: inline;"
 	color: #ad2b2b;
 	font: bold 9pt arial;
 	text-decoration: none;
