@@ -45,10 +45,10 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">New Game<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/index" onclick="sendNav('n')">Restart</a></li>
-            <li><a href="/index" onclick="sendNav('sS')">Small</a></li>
-            <li><a href="/index" onclick="sendNav('sM')">Medium</a></li>
-            <li><a href="/index" onclick="sendNav('sL')">Large</a></li>
+            <li><a href="/index" onclick="sendNav('n');setCookie('modal_shown', '0');">Restart</a></li>
+            <li><a href="/index" onclick="sendNav('sS');setCookie('modal_shown', '0');">Small</a></li>
+            <li><a href="/index" onclick="sendNav('sM');setCookie('modal_shown', '0');">Medium</a></li>
+            <li><a href="/index" onclick="sendNav('sL');setCookie('modal_shown', '0');">Large</a></li>
           </ul>
         </li>
         <li><a href="/index" onclick="sendNav('u')">Undo</a></li>
@@ -60,15 +60,38 @@
   </nav>
 
     <!-- End of the game modal dialog -->
-  <div class="modal fade bs-example-modal-sm" id="game_end" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal fade" id="game_end" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 id="result">You lose</h1>
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h1 id="result"></h1>
+          </div>
+          <div class="modal-body">
+            <div class="row" style="text-align: center">
+              <div class="col-md-4">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">Tries</div>
+                  <div class="panel-body" id="tries">0</div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="panel panel-success">
+                  <div class="panel-heading">Wins</div>
+                  <div class="panel-body" id="wins">0</div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="panel panel-danger">
+                  <div class="panel-heading">Loses</div>
+                  <div class="panel-body" id="loses">0</div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location.reload(); sendNav('sS');">Restart</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location.reload(); sendNav('n');setCookie('modal_shown', '0');">Restart</button>
           </div>
         </div>
     </div>
@@ -79,7 +102,7 @@
     <h1>&nbsp;&nbsp;Minesweeper</h1>
     <ul id="qwerty" style="list-style-type:none">
         @if(controller.isGameOver()) {<script>result('You lose')</script>}
-        @if(controller.isVictory()) {<script>result('You won!')</script>}
+        @if(controller.isVictory()) {<script>result('You win!')</script>}
     @for(line <- 1 until lines + 1){
       <li><div style="white-space: nowrap">
       @for(col <- 1 until cols + 1){
@@ -111,6 +134,7 @@
       </div></li>
     }
     </ul>
+
   <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container">
     <ul class="nav navbar-nav navbar-right">
