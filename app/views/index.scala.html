@@ -1,5 +1,5 @@
 @(message: String, controller:de.htwg.se.controller.IController)
-
+@import java.math.BigInteger;val lines=controller.getPlayingField.getLines;val cols=controller.getPlayingField.getColumns;
 @main("Minesweeper") {
   <script language="JavaScript">
   //Create a new socket
@@ -59,15 +59,15 @@
   </div><!-- /.container-fluid -->
   </nav>
 
-  <center>
+  <div class="row">
+    <div style="text-align: center;">
     <h1>&nbsp;&nbsp;Minesweeper</h1>
     <ul id="qwerty" style="list-style-type:none">
         @if(controller.isGameOver()) {<script>alert('Game Over!')</script>}
         @if(controller.isVictory()) {<script>alert('Victory!')</script>}
-
-    @for(line <- 1 until controller.getPlayingField.getLines + 1){
+    @for(line <- 1 until lines + 1){
       <li><div style="white-space: nowrap">
-      @for(col <- 1 until controller.getPlayingField.getColumns + 1){
+      @for(col <- 1 until cols + 1){
         <span class="Span">
           <a href="/index" onclick="sendClick(@line, @col)"
           @if(controller.getPlayingField.getCell(line, col).isRevealed) {
@@ -99,7 +99,9 @@
   <p>
     &nbsp;&nbsp;@message
   </p>
-</center>
+    </div>
+  </div>
+
   <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container">
     <ul class="nav navbar-nav navbar-right">
