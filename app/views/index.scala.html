@@ -59,12 +59,27 @@
   </div><!-- /.container-fluid -->
   </nav>
 
+    <!-- End of the game modal dialog -->
+  <div class="modal fade bs-example-modal-sm" id="game_end" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 id="result">You lose</h1>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location.reload(); sendNav('sS');">Restart</button>
+          </div>
+        </div>
+    </div>
+  </div>
+
   <div class="row">
     <div style="text-align: center;">
     <h1>&nbsp;&nbsp;Minesweeper</h1>
     <ul id="qwerty" style="list-style-type:none">
-        @if(controller.isGameOver()) {<script>alert('Game Over!')</script>}
-        @if(controller.isVictory()) {<script>alert('Victory!')</script>}
+        @if(controller.isGameOver()) {<script>result('You lose')</script>}
+        @if(controller.isVictory()) {<script>result('You won!')</script>}
     @for(line <- 1 until lines + 1){
       <li><div style="white-space: nowrap">
       @for(col <- 1 until cols + 1){
