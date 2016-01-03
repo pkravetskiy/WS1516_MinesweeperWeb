@@ -70,6 +70,19 @@ public class Application extends Controller {
 		return ok(Json.stringify(Json.toJson(json)));
 	}
 
+	public Result revealField(int row, int column) {
+		if (row < 10 && column < 10) {
+			minesweeper.getTui().processInputLine("0" + row + "-0" + column);
+		} else if (row < 10 && column >= 10) {
+			minesweeper.getTui().processInputLine("0" + row + "-" + column);
+		} else if (row >= 10 && column < 10) {
+			minesweeper.getTui().processInputLine(row + "-0" + column);
+		} else {
+			minesweeper.getTui().processInputLine(row + "-" + column);
+		}
+		return json();
+	}
+
 	public WebSocket<String> sockHandler() {
       return new WebSocket<String>() {
           // called when the websocket is established

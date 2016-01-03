@@ -20,5 +20,5 @@ function fill_grid(x, y, jsonData) {
 }
 
 function click(x, y) {
-  
+
 }
