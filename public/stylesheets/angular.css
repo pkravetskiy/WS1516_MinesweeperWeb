@@ -72,4 +72,8 @@ h1 {
     cursor: default;
 }
 
-button:focus {outline:0;}
+.Mine {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
