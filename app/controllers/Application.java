@@ -59,6 +59,9 @@ public class Application extends Controller {
 				field[i][j] = new HashMap<String, Object>();
 				field[i][j].put("value", new Integer(controller.getPlayingField().getCell(i+1, j+1).getValue()));
 				field[i][j].put("isrevealed", new Boolean(controller.getPlayingField().getCell(i+1, j+1).isRevealed()));
+				field[i][j].put("row", new Integer(i+1));
+				field[i][j].put("column", new Integer(j+1));
+
 			}
 		}
 
@@ -68,6 +71,19 @@ public class Application extends Controller {
 		json.put("field", field);
 
 		return ok(Json.stringify(Json.toJson(json)));
+	}
+
+	public Result revealField(int row, int column) {
+		if (row < 10 && column < 10) {
+			minesweeper.getTui().processInputLine("0" + row + "-0" + column);
+		} else if (row < 10 && column >= 10) {
+			minesweeper.getTui().processInputLine("0" + row + "-" + column);
+		} else if (row >= 10 && column < 10) {
+			minesweeper.getTui().processInputLine(row + "-0" + column);
+		} else {
+			minesweeper.getTui().processInputLine(row + "-" + column);
+		}
+		return json();
 	}
 
 	public WebSocket<String> sockHandler() {
