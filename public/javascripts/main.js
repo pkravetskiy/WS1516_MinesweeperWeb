@@ -19,6 +19,7 @@ function fill_grid(x, y, jsonData) {
   }
 }
 
-function click(x, y) {
-  
+function result(str) {
+  document.getElementById('result').textContent = str;
+  $("#game_end").modal({keyboard: false});
 }
