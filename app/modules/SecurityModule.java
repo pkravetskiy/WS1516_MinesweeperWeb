@@ -26,8 +26,6 @@ public class SecurityModule extends AbstractModule {
   @Override
   protected void configure() {
 
-    System.out.println("TEST");
-
     final String fbId = configuration.getString("fbId");
     final String fbSecret = configuration.getString("fbSecret");
     FacebookClient facebookClient = new FacebookClient(fbId, fbSecret);

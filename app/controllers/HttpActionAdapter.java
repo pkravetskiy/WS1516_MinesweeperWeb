@@ -10,7 +10,6 @@ public class HttpActionAdapter extends DefaultHttpActionAdapter {
 
     public HttpActionAdapter()  {
       super();
-      System.out.println("TEST");
     }
 
     @Override

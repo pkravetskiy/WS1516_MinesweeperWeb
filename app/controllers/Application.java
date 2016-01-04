@@ -25,7 +25,7 @@ public class Application extends UserProfileController<CommonProfile> {
 	private Minesweeper minesweeper = Minesweeper.getInstance();
 	private IController controller = minesweeper.getTui().getController();
 
-	@RequiresAuthentication(clientName = "FacebookClient")
+	@RequiresAuthentication(clientName = "GitHubClient,FacebookClient")
   public Result index() {
 		System.out.println(json());
     return ok(views.html.index.render("Minesweeper", controller));
@@ -109,4 +109,14 @@ public class Application extends UserProfileController<CommonProfile> {
           }
       };
   }
+
+	@RequiresAuthentication(clientName = "FacebookClient")
+  public Result signInFacebook() {
+		return ok(views.html.about.render());
+	}
+
+	@RequiresAuthentication(clientName = "GitHubClient")
+  public Result signInGithub() {
+		return ok(views.html.about.render());
+	}
 }

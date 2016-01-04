@@ -14,6 +14,10 @@ function statistic() {
   $("#game_end").modal();
 }
 
+function signin() {
+  $("#game_end").modal();
+}
+
 function result(str) {
   if (getCookie('modal_shown') == "0") {
     document.getElementById('result').textContent = str;
