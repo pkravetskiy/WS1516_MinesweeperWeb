@@ -1,5 +1,9 @@
 package controllers;
 
+import org.pac4j.play.java.RequiresAuthentication;
+import org.pac4j.play.java.UserProfileController;
+import org.pac4j.core.profile.CommonProfile;
+
 import play.data.Form;
 import play.mvc.*;
 import play.twirl.api.Html;
@@ -17,9 +21,11 @@ import java.util.HashMap;
 import akka.actor.*;
 import play.libs.F.*;
 
-public class Application extends Controller {
+public class Application extends UserProfileController<CommonProfile> {
 	private Minesweeper minesweeper = Minesweeper.getInstance();
 	private IController controller = minesweeper.getTui().getController();
+
+	//@RequiresAuthentication(clientName = "GitHubClient")
   public Result index() {
 		System.out.println(json());
     return ok(views.html.index.render("Minesweeper", controller));
