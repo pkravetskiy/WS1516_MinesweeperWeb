@@ -29,6 +29,8 @@
   }
   //Function for Navbar
   function sendNav(command) {
+    if (command != 'u' || command != 'r')
+      setCookie('modal_shown', '0');
     sock.send(command);
   }
   </script>
@@ -45,14 +47,15 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">New Game<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/index" onclick="sendNav('n');setCookie('modal_shown', '0');">Restart</a></li>
-            <li><a href="/index" onclick="sendNav('sS');setCookie('modal_shown', '0');">Small</a></li>
-            <li><a href="/index" onclick="sendNav('sM');setCookie('modal_shown', '0');">Medium</a></li>
-            <li><a href="/index" onclick="sendNav('sL');setCookie('modal_shown', '0');">Large</a></li>
+            <li><a href="/index" onclick="sendNav('n')">Restart</a></li>
+            <li><a href="/index" onclick="sendNav('sS')">Small</a></li>
+            <li><a href="/index" onclick="sendNav('sM')">Medium</a></li>
+            <li><a href="/index" onclick="sendNav('sL')">Large</a></li>
           </ul>
         </li>
         <li><a href="/index" onclick="sendNav('u')">Undo</a></li>
         <li><a href="/index" onclick="sendNav('r')">Redo</a></li>
+        <li><a href="#" onclick="statistic();">Statistic</a></li>
         <li><a href="/">About</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -63,7 +66,7 @@
   <div class="modal fade" id="game_end" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header" id="header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
             <h1 id="result"></h1>
           </div>
@@ -91,7 +94,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location.reload(); sendNav('n');setCookie('modal_shown', '0');">Restart</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="restart" onclick="window.location.reload(); sendNav('n');">Restart</button>
           </div>
         </div>
     </div>

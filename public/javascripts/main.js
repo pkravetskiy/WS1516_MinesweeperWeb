@@ -1,3 +1,19 @@
+function statistic() {
+  // remove header on the modal window
+  var elem = document.getElementById('header');
+  if (elem != null)
+    elem.parentNode.removeChild(elem);
+  // remove restart button on the modal window footer
+  elem = document.getElementById('restart');
+  if (elem != null)
+    elem.parentNode.removeChild(elem);
+  // update values for statistic
+  document.getElementById('tries').textContent = getCookie('tries');
+  document.getElementById('wins').textContent = getCookie('wins');
+  document.getElementById('loses').textContent = getCookie('loses');
+  $("#game_end").modal();
+}
+
 function result(str) {
   if (getCookie('modal_shown') == "0") {
     document.getElementById('result').textContent = str;
