@@ -32,9 +32,11 @@ public class SecurityModule extends AbstractModule {
     final String fbSecret = configuration.getString("fbSecret");
     FacebookClient facebookClient = new FacebookClient(fbId, fbSecret);
 
-    GitHubClient gitHubClient = new GitHubClient(fbId, fbSecret);
+    final String ghId = configuration.getString("ghId");
+    final String ghSecret = configuration.getString("ghSecret");
+    GitHubClient gitHubClient = new GitHubClient(ghId, ghSecret);
 
-    Clients clients = new Clients("http://localhost:8080/callback", facebookClient, gitHubClient);
+    Clients clients = new Clients("http://localhost:9000/callback", facebookClient, gitHubClient);
 
     Config config = new Config(clients);
     config.addAuthorizer("admin", new RequireAnyRoleAuthorizer("ROLE_ADMIN"));

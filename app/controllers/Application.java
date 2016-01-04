@@ -25,7 +25,7 @@ public class Application extends UserProfileController<CommonProfile> {
 	private Minesweeper minesweeper = Minesweeper.getInstance();
 	private IController controller = minesweeper.getTui().getController();
 
-	//@RequiresAuthentication(clientName = "GitHubClient")
+	@RequiresAuthentication(clientName = "GitHubClient")
   public Result index() {
 		System.out.println(json());
     return ok(views.html.index.render("Minesweeper", controller));
