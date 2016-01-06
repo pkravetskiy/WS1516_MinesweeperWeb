@@ -34,7 +34,7 @@ public class SecurityModule extends AbstractModule {
     final String ghSecret = configuration.getString("ghSecret");
     GitHubClient gitHubClient = new GitHubClient(ghId, ghSecret);
 
-    Clients clients = new Clients("https://minesweeper-web.herokuapp.com//callback", facebookClient, gitHubClient);
+    Clients clients = new Clients("https://minesweeper-web.herokuapp.com/callback", facebookClient, gitHubClient);
 
     Config config = new Config(clients);
     config.addAuthorizer("admin", new RequireAnyRoleAuthorizer("ROLE_ADMIN"));
