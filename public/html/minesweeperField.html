@@ -1,7 +1,7 @@
 
 <center>
   <h1>&nbsp;&nbsp;Minesweeper</h1>
-  <ul style="display: inline-block; list-style-type: none;">
+  <ul ng-cloak style="display: inline-block; list-style-type: none;">
     <li ng-repeat="line in playingField.field">
       <div ng-repeat="column in line" ng-include="'cell.html'" style="display: inline; float: left;"></div>
     </li>
