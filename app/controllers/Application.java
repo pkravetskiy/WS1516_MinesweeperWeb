@@ -56,6 +56,10 @@ public class Application extends UserProfileController<CommonProfile> {
 	}
 
 	public Result json() {
+		return ok(jsonStr());
+	}
+
+	private String jsonStr() {
 		int x = controller.getPlayingField().getLines();
 		int y = controller.getPlayingField().getColumns();
 		Map<String, Object> field[][] = new HashMap[x][y];
@@ -76,9 +80,8 @@ public class Application extends UserProfileController<CommonProfile> {
 		json.put("loose", new Boolean(controller.isGameOver()));
 		json.put("field", field);
 
-		return ok(Json.stringify(Json.toJson(json)));
+		return Json.stringify(Json.toJson(json));
 	}
-
 	public Result revealField(int row, int column) {
 		if (row < 10 && column < 10) {
 			minesweeper.getTui().processInputLine("0" + row + "-0" + column);
@@ -92,20 +95,21 @@ public class Application extends UserProfileController<CommonProfile> {
 		return json();
 	}
 
-	public WebSocket<String> sockHandler() {
-      return new WebSocket<String>() {
-          // called when the websocket is established
-          public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
-              // register a callback for processing instream events
-              in.onMessage(new Callback<String>() {
-                  public void invoke(String event) {
-										System.out.println(event);
-										minesweeper.getTui().processInputLine(event);
+    public WebSocket<String> sockHandler() {
+        return new WebSocket<String>() {
+            // called when the websocket is established
+            public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
+                // register a callback for processing instream events
+                in.onMessage(new Callback<String>() {
+                    public void invoke(String event) {
+                        System.out.println(event);
+                        minesweeper.getTui().processInputLine(event);
+                        out.write(jsonStr());
                   }
                });
 
               // write out a greeting
-              out.write("I'm contacting you regarding your recent websocket.");
+//              out.write(jsonStr());
           }
       };
   }

@@ -1,7 +1,8 @@
 
 <center>
   <h1>&nbsp;&nbsp;Minesweeper</h1>
-  <ul style="display: inline-block; list-style-type: none;">
+  <div ng-show="loading" class="loading"><img src="../images/ajax-loader.gif" width="320"><br><h2>Loading...</h2></div>
+  <ul ng-hide="loading" style="display: inline-block; list-style-type: none;">
     <li ng-repeat="line in playingField.field">
       <div ng-repeat="column in line" ng-include="'cell.html'" style="display: inline; float: left;"></div>
     </li>

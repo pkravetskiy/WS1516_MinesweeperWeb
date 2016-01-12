@@ -9,8 +9,13 @@ h1 {
   color: #ad2b2b;
 }
 
+.loading {
+	width:100%;
+	text-align:center;
+	margin-top: 300px;
+}
+
 .key{
-  style="display: inline;"
 	color: #ad2b2b;
 	font: bold 9pt arial;
 	text-decoration: none;

@@ -4,17 +4,13 @@
   <script language="JavaScript">
   //Create a new socket
   $(function() {
-    var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
-    sock = new WS("@routes.Application.sockHandler().webSocketURL(request)")
-
-    sock.onmessage = function(event) {
-      //Nothing for the moment
-    }
+    var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket;
+    sock = new WS("@routes.Application.sockHandler().webSocketURL(request)");
 
     $('button.send').click(function() {
       sock.send("I'm sending a message now.")
     });
-  })
+  });
   //Function for Minesweeper buttons
   function sendClick(row,column) {
     if (row < 10 && column < 10) {
@@ -110,7 +106,7 @@
       <li><div style="white-space: nowrap">
       @for(col <- 1 until cols + 1){
         <span class="Span">
-          <a href="/index" onclick="sendClick(@line, @col)"
+          <a name="buttons" href="/index" onclick="sendClick(@line, @col)"
           @if(controller.getPlayingField.getCell(line, col).isRevealed) {
               class="key not_active"
           } else {

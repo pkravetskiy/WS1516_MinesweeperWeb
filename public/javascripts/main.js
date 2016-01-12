@@ -81,18 +81,8 @@ function getCookie(cname) {
     setCookie('modal_shown', '0');
 })();
 
-$(document).ready(function(){
-  $("a[href='/index']").hover(function(){
-    $(this).css("background", "#C6DAF2").delay("fast");
-  }, function(){
-    $(this).queue(function(){
-      $(this).css("background", "#eff0f2").dequeue();
-    });
-  });
-});
-
-$(document).ready(function() {
-  $("a[href='/index']").bind("contextmenu", function(event){
+window.onload = function() {
+  $("a[name='buttons']").bind("contextmenu", function(event){
     if (event.which == 3 && !($("#flag").length)) {
       $(this).append('<img id="flag" style="margin-top: -30px" class="Mine" align="middle" height="27" width="27" src="assets/images/flag.png">');
       return false;
@@ -101,4 +91,11 @@ $(document).ready(function() {
       return false;
     }
   });
-});
+  $("a[name='buttons']").hover(function(){
+    $(this).css("background", "#C6DAF2").delay("fast");
+  }, function(){
+    $(this).queue(function(){
+      $(this).css("background", "#eff0f2").dequeue();
+    });
+  });
+};
