@@ -1,16 +1,25 @@
-var app = angular.module("minesweeperApp", []);
+var app = angular.module("minesweeperApp", ["ui.bootstrap", "ui.bootstrap.modal"]);
 
 app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
+  $scope.loading = true;
   $http.get('/json').success(function(data) {
     $scope.playingField = data;
 
     $scope.cellclicked = function( row, column) {
+      $scope.loading = true;
       $http.get('/json/'+row+'/'+column).success(function(data) {
         $scope.playingField = data;
       });
-    }
+      $scope.loading = false;
+    };
+    $scope.loading = false;
   });
-  $scope.init = function() {
+
+  $scope.showResults = function(){
+    $scope.showRes = true
+  };
+
+  var init = function() {
     // Keep all pending requests here until they get responses
     var callbacks = {};
     // Create a unique callback ID to map requests to responses
@@ -18,19 +27,21 @@ app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
     // Create our websocket object with the address to the websocket
 
     var ws = window['MozWebSocket'] ? MozWebSocket : WebSocket;
-    sock = new ws("ws://localhost:9000/greeter");
+    var sock = new ws("ws://localhost:9000/greeter");
 
     sock.onopen = function(){
       console.log("Socket has been opened!");
     };
 
     sock.onmessage = function(message) {
-      //console.log(message);
-      listener(message.data);
+      listener(message);
       $scope.playingField = JSON.parse(message.data);
+      $scope.$apply();
+      $scope.loading = false;
     };
 
     $scope.sendRequest =  function(request) {
+      $scope.loading = true;
       var defer = $q.defer();
       var callbackId = getCallbackId();
       callbacks[callbackId] = {
@@ -44,8 +55,8 @@ app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
     };
 
     function listener(data) {
-      var messageObj = data;
-      console.log("Received data from websocket: ", messageObj);
+      var messageObj = data.data;
+      console.log("Received data from websocket: ", data);
       // If an object exists with callback_id in our callbacks object, resolve it
       if(callbacks.hasOwnProperty(messageObj.callback_id)) {
         console.log(callbacks[messageObj.callback_id]);
@@ -61,7 +72,8 @@ app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
       }
       return currentCallbackId;
     }
-  }
+  };
+  init()
 });
 
 app.controller('hoverCtrl', function($scope, $timeout) {

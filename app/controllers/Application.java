@@ -95,20 +95,21 @@ public class Application extends UserProfileController<CommonProfile> {
 		return json();
 	}
 
-	public WebSocket<String> sockHandler() {
-      return new WebSocket<String>() {
-          // called when the websocket is established
-          public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
-              // register a callback for processing instream events
-              in.onMessage(new Callback<String>() {
-                  public void invoke(String event) {
-										System.out.println(event);
-										minesweeper.getTui().processInputLine(event);
+    public WebSocket<String> sockHandler() {
+        return new WebSocket<String>() {
+            // called when the websocket is established
+            public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
+                // register a callback for processing instream events
+                in.onMessage(new Callback<String>() {
+                    public void invoke(String event) {
+                        System.out.println(event);
+                        minesweeper.getTui().processInputLine(event);
+                        out.write(jsonStr());
                   }
                });
 
               // write out a greeting
-              out.write(jsonStr());
+//              out.write(jsonStr());
           }
       };
   }
