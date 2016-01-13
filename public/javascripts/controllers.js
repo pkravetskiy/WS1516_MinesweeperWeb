@@ -88,4 +88,17 @@ app.controller('hoverCtrl', function($scope, $timeout) {
       $timeout( function(){ $scope.callAtTimeout(); }, 100);
     }
   };
+  $scope.none = function() {
+    
+  }
+});
+
+app.directive('ngRightClick', function($parse) {
+    return function(scope, element, attrs) {
+        element.bind('contextmenu', function(event) {
+            scope.$apply(function() {
+                event.preventDefault();
+            });
+        });
+    };
 });
