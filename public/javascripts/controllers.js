@@ -27,7 +27,7 @@ app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
     // Create our websocket object with the address to the websocket
 
     var ws = window['MozWebSocket'] ? MozWebSocket : WebSocket;
-    var sock = new ws("ws://minesweeper-web.herokuapp.com/greeter");
+    var sock = new ws("wss://minesweeper-web.herokuapp.com/greeter");
 
     sock.onopen = function(){
       console.log("Socket has been opened!");
