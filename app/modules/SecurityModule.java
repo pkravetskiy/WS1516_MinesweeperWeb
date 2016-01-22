@@ -37,7 +37,7 @@ public class SecurityModule extends AbstractModule {
     GitHubClient gitHubClient = new GitHubClient(ghId, ghSecret);
 
     // HTTP
-    final FormClient formClient = new FormClient("/", new SimpleTestUsernamePasswordAuthenticator());
+    final FormClient formClient = new FormClient("/", new SimpleUserPassAuthenticator());
 
     Clients clients = new Clients("http://localhost:9000/callback", facebookClient, gitHubClient, formClient);
 
