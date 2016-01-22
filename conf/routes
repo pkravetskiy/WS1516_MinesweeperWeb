@@ -13,9 +13,11 @@ GET 	  /json/:row/:column          controllers.Application.revealField(row:Int, 
 
 # Logins
 GET     /callback                   org.pac4j.play.CallbackController.callback()
+POST    /callback                   @org.pac4j.play.CallbackController.callback()
 GET     /logout                     org.pac4j.play.ApplicationLogoutController.logout()
 GET     /signInFacebook             controllers.Application.signInFacebook()
 GET     /signInGithub               controllers.Application.signInGithub()
+GET     /signInLogin                controllers.Application.signInLogin()
 
 
 # Map static resources from the /public folder to the /assets URL path

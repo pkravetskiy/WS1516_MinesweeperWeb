@@ -4,6 +4,7 @@ import org.pac4j.play.java.RequiresAuthentication;
 import org.pac4j.play.java.UserProfileController;
 import org.pac4j.core.profile.CommonProfile;
 
+import org.pac4j.http.client.indirect.FormClient;
 import play.data.Form;
 import play.mvc.*;
 import play.twirl.api.Html;
@@ -26,6 +27,7 @@ public class Application extends UserProfileController<CommonProfile> {
 	private IController controller = minesweeper.getTui().getController();
 
 	//@RequiresAuthentication(clientName = "GitHubClient,FacebookClient")
+	@RequiresAuthentication(clientName = "FormClient")
   public Result index() {
 		System.out.println(json());
     return ok(views.html.index.render("Minesweeper", controller));
@@ -44,7 +46,7 @@ public class Application extends UserProfileController<CommonProfile> {
   }
 
 	public Result about() {
-		return ok(views.html.about.render());
+		return ok(views.html.about.render(getCallbackUrlFormClient()));
 	}
 
 	public Result license() {
@@ -116,11 +118,20 @@ public class Application extends UserProfileController<CommonProfile> {
 
 	@RequiresAuthentication(clientName = "FacebookClient")
   public Result signInFacebook() {
-		return ok(views.html.about.render());
+		return ok(views.html.about.render(getCallbackUrlFormClient()));
 	}
 
 	@RequiresAuthentication(clientName = "GitHubClient")
   public Result signInGithub() {
-		return ok(views.html.about.render());
+		return ok(views.html.about.render(getCallbackUrlFormClient()));
+	}
+
+	public Result signInLogin() {
+    return ok(views.html.about.render(getCallbackUrlFormClient()));
+	}
+
+	private String getCallbackUrlFormClient()	{
+		final FormClient formClient = (FormClient) config.getClients().findClient("FormClient");
+		return formClient.getCallbackUrl();
 	}
 }
