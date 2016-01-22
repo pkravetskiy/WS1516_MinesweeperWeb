@@ -89,7 +89,7 @@ app.controller('hoverCtrl', function($scope, $timeout) {
     }
   };
   $scope.none = function() {
-    
+
   }
 });
 

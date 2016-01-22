@@ -6,10 +6,6 @@
   $(function() {
     var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket;
     sock = new WS("@routes.Application.sockHandler().webSocketURL(request)");
-
-    $('button.send').click(function() {
-      sock.send("I'm sending a message now.")
-    });
   });
   //Function for Minesweeper buttons
   function sendClick(row,column) {
