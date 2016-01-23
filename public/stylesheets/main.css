@@ -91,10 +91,11 @@ blockquote {
 
 
 .Span {
-       display: inline-flex;
-       min-width: 10px;
-       /*border-style: outset;*/
-   }
+  text-decoration: none;
+  display: inline-flex;
+  min-width: 10px;
+  outline: 0;
+}
 
 .Mine {
   color: #c0392b;
@@ -102,22 +103,11 @@ blockquote {
 }
 
 .Numbers {
-  /*padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;*/
   border-style: inset;
-  /*border-width: 5px;*/
   color: #3bc492;
 }
 
 .Unrevealed {
-  /*padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;*/
-  /*border-style: groove;*/
-  /*border-width: 5px;*/
   color: #555;
 }
 
@@ -139,6 +129,8 @@ blockquote {
 
 /* Minesweeper cells */
 #minesweeperCell {
+    text-decoration: none;
+    outline: 0;
     color: #c0392b;
     word-wrap: break-word;
     font-size: 20px;
@@ -149,9 +141,11 @@ blockquote {
     transition: color 0.1s ease-in, background 0.1s ease-in;
 }
 
-#minesweeperCell :hover,
+#minesweeperCell :hover {
+  text-decoration: none;
+  outline: 0;
+}
 #minesweeperCell :focus {
-    color: #c0392b;
     text-decoration: none;
     outline: 0;
 }
