@@ -1,4 +1,4 @@
-@(message: String, controller:de.htwg.se.controller.IController)
+@(message: String, controller:de.htwg.se.controller.IController, loginStatus : String)
 @import java.math.BigInteger;val lines=controller.getPlayingField.getLines;val cols=controller.getPlayingField.getColumns;
 @main("Minesweeper") {
   <script language="JavaScript">
@@ -49,6 +49,9 @@
         <li><a href="/index" onclick="sendNav('r')">Redo</a></li>
         <li><a href="#" onclick="statistic();">Statistic</a></li>
         <li><a href="/">About</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><div style="font-size: 20px; margin: 13px 0 0;">@loginStatus</div></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

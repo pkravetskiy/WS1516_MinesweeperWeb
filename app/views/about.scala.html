@@ -1,4 +1,4 @@
-@(loginUrl: String)
+@(loginUrl: String, loginStatus : String)
 
 <!DOCTYPE HTML>
 <html>
@@ -25,6 +25,9 @@
           <ul class="nav navbar-nav">
             <li><a href="#" onclick="signin();">Sign in</a></li>
             <li><a href="/logout?url=/">Log out</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><div style="font-size: 20px; margin: 13px 0 0;">@loginStatus</div></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div>

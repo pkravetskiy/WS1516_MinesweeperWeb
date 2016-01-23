@@ -5,6 +5,7 @@ import org.pac4j.play.java.UserProfileController;
 import org.pac4j.core.profile.CommonProfile;
 
 import org.pac4j.http.client.indirect.FormClient;
+import org.pac4j.core.profile.CommonProfile;
 import play.data.Form;
 import play.mvc.*;
 import play.twirl.api.Html;
@@ -30,7 +31,7 @@ public class Application extends UserProfileController<CommonProfile> {
 	@RequiresAuthentication(clientName = "FormClient")
   public Result index() {
 		System.out.println(json());
-    return ok(views.html.index.render("Minesweeper", controller));
+    return ok(views.html.index.render("Minesweeper", controller, getLoginStatus()));
   }
 
   public Result commandline(String command) {
@@ -42,11 +43,11 @@ public class Application extends UserProfileController<CommonProfile> {
 		} else {
 			command = "You typed: " + command;
 		}
-  	return ok(views.html.index.render(command, controller));
+  	return ok(views.html.index.render(command, controller, getLoginStatus()));
   }
 
 	public Result about() {
-		return ok(views.html.about.render(getCallbackUrlFormClient()));
+		return ok(views.html.about.render(getCallbackUrlFormClient(), getLoginStatus()));
 	}
 
 	public Result license() {
@@ -118,20 +119,34 @@ public class Application extends UserProfileController<CommonProfile> {
 
 	@RequiresAuthentication(clientName = "FacebookClient")
   public Result signInFacebook() {
-		return ok(views.html.about.render(getCallbackUrlFormClient()));
+		return ok(views.html.about.render(getCallbackUrlFormClient(), getLoginStatus()));
 	}
 
 	@RequiresAuthentication(clientName = "GitHubClient")
   public Result signInGithub() {
-		return ok(views.html.about.render(getCallbackUrlFormClient()));
+		return ok(views.html.about.render(getCallbackUrlFormClient(), getLoginStatus()));
 	}
 
 	public Result signInLogin() {
-    return ok(views.html.about.render(getCallbackUrlFormClient()));
+    return ok(views.html.about.render(getCallbackUrlFormClient(), getLoginStatus()));
 	}
 
 	private String getCallbackUrlFormClient()	{
 		final FormClient formClient = (FormClient) config.getClients().findClient("FormClient");
 		return formClient.getCallbackUrl();
+	}
+
+	private String getLoginStatus()	{
+		CommonProfile profile = getUserProfile();
+		if(profile == null)	{
+			return "Not logged in";
+		}
+		if(profile instanceof org.pac4j.http.profile.HttpProfile)	{
+			return "Logged in as " + profile.getUsername();
+		}
+		if(profile instanceof org.pac4j.oauth.profile.OAuth20Profile)	{
+			return "Logged in as " + profile.getDisplayName();
+		}
+		return "Something went wrong";
 	}
 }
