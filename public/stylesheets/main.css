@@ -16,6 +16,12 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
+.loading {
+	width:100%;
+	text-align:center;
+	margin-top: 300px;
+}
+
 .key{
 	display: block;
 	color: #ad2b2b;
@@ -85,7 +91,7 @@ body {
 	text-transform: uppercase;}
 
 /* Titles */
-h1 {
+#minesweeperHeader {
   text-shadow: 0 0 5px #ddd, 0 0 10px #ddd,
              0 0 20px #ddd, 0 0 30px #ddd,
              0 0 40px #ddd;

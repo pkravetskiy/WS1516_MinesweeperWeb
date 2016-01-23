@@ -97,7 +97,7 @@
 
   <div class="row">
     <div style="text-align: center;">
-    <h1>&nbsp;&nbsp;Minesweeper</h1>
+    <h1 id="minesweeperHeader">&nbsp;&nbsp;Minesweeper</h1>
     <ul id="qwerty" style="list-style-type:none">
         @if(controller.isGameOver()) {<script>result('You lose')</script>}
         @if(controller.isVictory()) {<script>result('You win!')</script>}
