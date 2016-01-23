@@ -128,8 +128,17 @@ blockquote {
     color: #ad2b2b;
 }
 
-/* Minesweeper fields */
+/* Minesweeper field */
 #minesweeperField {
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
+/* Minesweeper cells */
+#minesweeperCell {
     color: #c0392b;
     word-wrap: break-word;
     font-size: 20px;
@@ -140,15 +149,15 @@ blockquote {
     transition: color 0.1s ease-in, background 0.1s ease-in;
 }
 
-#minesweeperField :hover,
-#minesweeperField :focus {
+#minesweeperCell :hover,
+#minesweeperCell :focus {
     color: #c0392b;
     text-decoration: none;
     outline: 0;
 }
 
-#minesweeperField :before,
-#minesweeperField :after {
+#minesweeperCell :before,
+#minesweeperCell :after {
     -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
     -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
     -ms-transition: color 0.1s ease-in, background 0.1s ease-in;

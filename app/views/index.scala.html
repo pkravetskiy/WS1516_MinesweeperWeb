@@ -30,6 +30,44 @@
   }
 </script>
 
+<!-- End of the game modal dialog -->
+<div class="modal fade" id="game_end" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header" id="header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <h1 id="result"></h1>
+      </div>
+      <div class="modal-body">
+        <div class="row" style="text-align: center">
+          <div class="col-md-4">
+            <div class="panel panel-primary">
+              <div class="panel-heading">Tries</div>
+              <div class="panel-body" id="tries">0</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="panel panel-success">
+              <div class="panel-heading">Wins</div>
+              <div class="panel-body" id="wins">0</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="panel panel-danger">
+              <div class="panel-heading">Loses</div>
+              <div class="panel-body" id="loses">0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="restart" onclick="window.location.reload(); sendNav('n');">Restart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!--Upper navbar-->
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -61,8 +99,9 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class="row">
-  <div style="text-align: center;">
+<!--Content-->
+<div>
+  <div id="minesweeperField">
     <h1 id="minesweeperHeader">&nbsp;&nbsp;Minesweeper</h1>
     <ul id="qwerty" style="list-style-type:none">
       @if(controller.isGameOver()) {<script>result('You lose')</script>}
@@ -72,7 +111,7 @@
         <div style="white-space: nowrap">
           @for(col <- 1 until cols + 1){
           <span class="Span">
-            <a id="minesweeperField" name="buttons" href="/index" onclick="sendClick(@line, @col)"
+            <a id="minesweeperCell" name="buttons" href="/index" onclick="sendClick(@line, @col)"
               @if(controller.getPlayingField.getCell(line, col).isRevealed) {
                 class="key not_active"
               } else {
@@ -111,41 +150,3 @@
     </ul>
   </div>
 </nav>
-
-<!-- End of the game modal dialog -->
-<div class="modal fade" id="game_end" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-  <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header" id="header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-          <h1 id="result"></h1>
-        </div>
-        <div class="modal-body">
-          <div class="row" style="text-align: center">
-            <div class="col-md-4">
-              <div class="panel panel-primary">
-                <div class="panel-heading">Tries</div>
-                <div class="panel-body" id="tries">0</div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="panel panel-success">
-                <div class="panel-heading">Wins</div>
-                <div class="panel-body" id="wins">0</div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="panel panel-danger">
-                <div class="panel-heading">Loses</div>
-                <div class="panel-body" id="loses">0</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" id="restart" onclick="window.location.reload(); sendNav('n');">Restart</button>
-        </div>
-      </div>
-  </div>
-</div>
