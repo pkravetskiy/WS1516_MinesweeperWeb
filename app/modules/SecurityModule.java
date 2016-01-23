@@ -10,6 +10,8 @@ import org.pac4j.core.client.Clients;
 import org.pac4j.core.config.Config;
 import org.pac4j.core.authorization.RequireAnyRoleAuthorizer;
 import org.pac4j.play.http.DefaultHttpActionAdapter;
+import org.pac4j.play.ApplicationLogoutController;
+import org.pac4j.play.CallbackController;
 import controllers.HttpActionAdapter;
 import play.Configuration;
 import play.Environment;
@@ -46,5 +48,14 @@ public class SecurityModule extends AbstractModule {
     //config.addAuthorizer("custom", new CustomAuthorizer());
     config.setHttpActionAdapter(new HttpActionAdapter());
     bind(Config.class).toInstance(config);
+
+    // callback
+    final CallbackController callbackController = new CallbackController();
+    callbackController.setDefaultUrl("/");
+    bind(CallbackController.class).toInstance(callbackController);
+    // logout
+    final ApplicationLogoutController logoutController = new ApplicationLogoutController();
+    logoutController.setDefaultUrl("/");
+    bind(ApplicationLogoutController.class).toInstance(logoutController);
   }
 }
