@@ -15,17 +15,14 @@
   <script src="../javascripts/ui-bootstrap-tpls-1.0.3.min.js"></script>
 </head>
 
-<body ng-controller="fieldCtrl">
+<!-- Upper navbar -->
+<body id="backgroundBody" ng-controller="fieldCtrl">
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="/"><img alt="Brand" height="20" width="20" src="../images/minesweepericon.png"></a>
         <a class="navbar-brand" href="/">Minesweeper</a>
       </div>
-
-
-
-
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="dropdown">
@@ -46,11 +43,11 @@
   </div><!-- /.container-fluid -->
   </nav>
 
-  <!-- Modal dialog results -->
-
+  <!--Content-->
   <h1 id="minesweeperHeader">&nbsp;&nbsp;Minesweeper</h1>
   <div ng-include="'minesweeperField.html'"></div>
 
+  <!--Lower navbar-->
   <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
       <ul class="nav navbar-nav navbar-right">
