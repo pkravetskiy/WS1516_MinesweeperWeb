@@ -1,10 +1,4 @@
-#content-wrap{
-    margin-top: 30px;
-    margin-bottom: 50px;
-    margin-right: 30%;
-    margin-left: 30%;
-    background-color: #f2f2f2;
-}
+
 body {
     background-color: #f2f2f2;
     font-family: "Lato";
@@ -15,6 +9,16 @@ body {
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
 }
+
+blockquote {
+    display: block;
+    background-color:#E6E6E6;
+}
+
+.centered {
+    text-align: center;
+}
+
 
 .loading {
 	width:100%;
@@ -85,72 +89,6 @@ body {
     cursor: default;
 }
 
-#qwerty li a span {
-	display: block;
-	margin: 13px 0 0;
-	text-transform: uppercase;}
-
-/* Titles */
-#minesweeperHeader {
-  text-shadow: 0 0 5px #ddd, 0 0 10px #ddd,
-             0 0 20px #ddd, 0 0 30px #ddd,
-             0 0 40px #ddd;
-  font-family: "Raleway";
-  font-weight: 100;
-  font-size: 80px;
-  text-align: center;
-  color: #ad2b2b;
-}
-h2, h3, h4, h5, h6 {
-    font-family: "Raleway";
-    font-weight: 300;
-    color: #ad2b2b;
-    text-align: center;
-}
-
-.centered {
-    text-align: center;
-}
-
-/* Links */
-a {
-    color: #3bc492;
-    word-wrap: break-word;
-    font-size: 20px;
-    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
-    transition: color 0.1s ease-in, background 0.1s ease-in;
-}
-
-a:hover,
-a:focus {
-    color: #c0392b;
-    text-decoration: none;
-    outline: 0;
-}
-
-a:before,
-a:after {
-    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
-    transition: color 0.1s ease-in, background 0.1s ease-in;
-}
-
-blockquote {
-    display: block;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    margin-left: 80px;
-    margin-right: 80px;
-}
-
-/* ==========================================================================
-   Wrap Sections
-   ========================================================================== */
 
 .Span {
        display: inline-flex;
@@ -183,8 +121,67 @@ blockquote {
   color: #555;
 }
 
-/* Copyright Wrap */
+/* Headers in about page */
+#headerAbout {
+    font-family: "Raleway";
+    font-weight: 300;
+    color: #ad2b2b;
+}
 
+/* Minesweeper fields */
+#minesweeperField {
+    color: #3bc492;
+    word-wrap: break-word;
+    font-size: 20px;
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+#minesweeperField :hover,
+#minesweeperField :focus {
+    color: #c0392b;
+    text-decoration: none;
+    outline: 0;
+}
+
+#minesweeperField :before,
+#minesweeperField :after {
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+#content-wrap{
+    margin-top: 30px;
+    margin-bottom: 50px;
+    margin-right: 30%;
+    margin-left: 30%;
+    background-color: #f2f2f2;
+}
+
+#qwerty li a span {
+	display: block;
+	margin: 13px 0 0;
+	text-transform: uppercase;}
+
+/* Titles */
+#minesweeperHeader {
+  text-shadow: 0 0 5px #ddd, 0 0 10px #ddd,
+             0 0 20px #ddd, 0 0 30px #ddd,
+             0 0 40px #ddd;
+  font-family: "Raleway";
+  font-weight: 100;
+  font-size: 80px;
+  text-align: center;
+  color: #ad2b2b;
+}
+
+/* Copyright Wrap */
 #c {
 	background: #222222;
 	padding-top: 15px;

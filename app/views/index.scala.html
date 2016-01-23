@@ -105,7 +105,7 @@
       <li><div style="white-space: nowrap">
       @for(col <- 1 until cols + 1){
         <span class="Span">
-          <a name="buttons" href="/index" onclick="sendClick(@line, @col)"
+          <a id="minesweeperField" name="buttons" href="/index" onclick="sendClick(@line, @col)"
           @if(controller.getPlayingField.getCell(line, col).isRevealed) {
               class="key not_active"
           } else {

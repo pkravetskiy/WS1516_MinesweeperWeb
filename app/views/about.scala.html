@@ -15,6 +15,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
   </head>
   <body>
+    <!--Upper Navbar-->
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -33,18 +34,19 @@
       </div>
     </nav>
 
+    <!--Content-->
     <div id="content-wrap">
       <h1 id="minesweeperHeader" align=center>Minesweeper</h1>
       <blockquote cite="https://de.wikipedia.org/wiki/Minesweeper">
-      Minesweeper ist ein zunächst simples, dem Betriebssystem Microsoft Windows bis einschließlich der Version Windows 7 beigelegtes Computerspiel,
-      bei dem der Spieler durch logisches Denken herausfinden muss, hinter welchen Feldern Minen versteckt sind. Als zusätzliche Herausforderung läuft eine Stoppuhr.
-      Das Ziel ist, möglichst schnell alle Felder aufzudecken, hinter welchen keine Minen verborgen sind.<a href="https://de.wikipedia.org/wiki/Minesweeper">1</a>
+        Minesweeper ist ein zunächst simples, dem Betriebssystem Microsoft Windows bis einschließlich der Version Windows 7 beigelegtes Computerspiel,
+        bei dem der Spieler durch logisches Denken herausfinden muss, hinter welchen Feldern Minen versteckt sind. Als zusätzliche Herausforderung läuft eine Stoppuhr.
+        Das Ziel ist, möglichst schnell alle Felder aufzudecken, hinter welchen keine Minen verborgen sind.<a href="https://de.wikipedia.org/wiki/Minesweeper">1</a>
       </blockquote>
-      <h2>Ziel des Spiels</h2>
+      <h2 id="headerAbout">Ziel des Spiels</h2>
       Ziel des Spiels ist es, die leeren Quadrate aufzudecken und dabei diejenigen
       Quadrate zu meiden, hinter denen sich Minen verstecken. Je schneller Sie die leeren
       Quadrate aufdecken, desto höher Ihre Punktzahl.
-      <h2>Das Spielfeld</h2>
+      <h2 id="headerAbout">Das Spielfeld</h2>
       Sie können bei Minesweeper unter drei
       Standardspielfeldern mit unterschiedlicher Schwierigkeitsstufe wählen.
       <ul>
@@ -58,7 +60,7 @@
           <b>Large</b>: 480 Quadrate, 99 Minen
         </li>
       </ul>
-      <h2>Spileweise</h2>
+      <h2 id="headerAbout">Spileweise</h2>
       Die Minesweeper-Regeln sind einfach:
       <ul>
         <li>
@@ -71,10 +73,10 @@
           Wird beim Aufdecken eines Quadrats eine Zahl angezeigt, steht diese für die Anzahl der Minen, die in den benachbarten acht Quadraten verborgen sind. Anhand dieser Angabe kann abgeleitet werden, unter welchen der angrenzenden Quadrate sich Minen befinden und auf welche Quadrate gefahrlos geklickt werden kann.
         </li>
       </ul>
-      <h2>Zum Spiel</h2>
+      <h2 id="headerAbout">Zum Spiel</h2>
       <ul>
         <li>
-          <a href="/index">Standard JavaScript Version</a>
+          <a href="/index">Play/JavaScript Version</a>
         </li>
         <li>
           <a href="/assets/html/minesweeper.html">Angular.js Version</a>
