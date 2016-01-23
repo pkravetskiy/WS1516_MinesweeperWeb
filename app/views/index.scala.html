@@ -103,12 +103,13 @@
 <div>
   <div id="minesweeperField">
     <h1 id="minesweeperHeader">&nbsp;&nbsp;Minesweeper</h1>
-    <ul id="qwerty" style="list-style-type:none">
+    <center>
+    <ul id="qwerty" style="display: table-row; list-style-type:none">
       @if(controller.isGameOver()) {<script>result('You lose')</script>}
       @if(controller.isVictory()) {<script>result('You win!')</script>}
       @for(line <- 1 until lines + 1) {
       <li>
-        <div style="white-space: nowrap">
+        <div style="white-space: nowrap;">
           @for(col <- 1 until cols + 1){
           <span class="Span">
             <a id="minesweeperCell" name="buttons" href="/index" onclick="sendClick(@line, @col)"
@@ -137,6 +138,7 @@
         </div>
       </li>}
     </ul>}
+    </center>
   </div>
 </div>
 

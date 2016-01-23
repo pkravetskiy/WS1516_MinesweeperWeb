@@ -93,7 +93,6 @@ blockquote {
 .Span {
   text-decoration: none;
   display: inline-flex;
-  min-width: 10px;
   outline: 0;
 }
 
@@ -200,4 +199,18 @@ blockquote {
 
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
+}
+
+#minesweeperFieldAngular {
+  text-decoration: none;
+  outline: 0;
+  margin: 13px 0 0;
+  color: #c0392b;
+  word-wrap: break-word;
+  font-size: 20px;
+  -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+  -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+  -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+  -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+  transition: color 0.1s ease-in, background 0.1s ease-in;
 }
