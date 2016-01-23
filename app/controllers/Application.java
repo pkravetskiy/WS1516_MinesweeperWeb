@@ -24,17 +24,23 @@ import akka.actor.*;
 import play.libs.F.*;
 
 public class Application extends UserProfileController<CommonProfile> {
-	private Minesweeper minesweeper = Minesweeper.getInstance();
-	private IController controller = minesweeper.getTui().getController();
+
+	private HashMap<String, Minesweeper> userMsInstanceMap = new HashMap<String, Minesweeper>();
+
+	//private Minesweeper minesweeper = Minesweeper.getInstance();
+	//private IController controller = minesweeper.getTui().getController();
 
 	//@RequiresAuthentication(clientName = "GitHubClient,FacebookClient")
 	@RequiresAuthentication(clientName = "FormClient")
   public Result index() {
-		System.out.println(json());
+		Minesweeper minesweeper = getMsInstanceFromUser();
+		IController controller = minesweeper.getTui().getController();
     return ok(views.html.index.render("Minesweeper", controller, getLoginStatus()));
   }
 
   public Result commandline(String command) {
+		Minesweeper minesweeper = getMsInstanceFromUser();
+		IController controller = minesweeper.getTui().getController();
   	minesweeper.getTui().processInputLine(command);
 		if (controller.isVictory()) {
 			command = "Victory!";
@@ -63,6 +69,8 @@ public class Application extends UserProfileController<CommonProfile> {
 	}
 
 	private String jsonStr() {
+		Minesweeper minesweeper = getMsInstanceFromUser();
+		IController controller = minesweeper.getTui().getController();
 		int x = controller.getPlayingField().getLines();
 		int y = controller.getPlayingField().getColumns();
 		Map<String, Object> field[][] = new HashMap[x][y];
@@ -86,6 +94,8 @@ public class Application extends UserProfileController<CommonProfile> {
 		return Json.stringify(Json.toJson(json));
 	}
 	public Result revealField(int row, int column) {
+		Minesweeper minesweeper = getMsInstanceFromUser();
+		IController controller = minesweeper.getTui().getController();
 		if (row < 10 && column < 10) {
 			minesweeper.getTui().processInputLine("0" + row + "-0" + column);
 		} else if (row < 10 && column >= 10) {
@@ -99,23 +109,25 @@ public class Application extends UserProfileController<CommonProfile> {
 	}
 
     public WebSocket<String> sockHandler() {
-        return new WebSocket<String>() {
-            // called when the websocket is established
-            public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
-                // register a callback for processing instream events
-                in.onMessage(new Callback<String>() {
-                    public void invoke(String event) {
-                        System.out.println(event);
-                        minesweeper.getTui().processInputLine(event);
-                        out.write(jsonStr());
-                  }
-               });
+			Minesweeper minesweeper = getMsInstanceFromUser();
+			IController controller = minesweeper.getTui().getController();
+      return new WebSocket<String>() {
+          // called when the websocket is established
+          public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
+              // register a callback for processing instream events
+              in.onMessage(new Callback<String>() {
+                  public void invoke(String event) {
+                      System.out.println(event);
+                      minesweeper.getTui().processInputLine(event);
+                      out.write(jsonStr());
+                }
+             });
 
-              // write out a greeting
-							//out.write(jsonStr());
-          }
-      };
-  }
+            // write out a greeting
+						//out.write(jsonStr());
+        }
+    	};
+  	}
 
 	@RequiresAuthentication(clientName = "FacebookClient")
   public Result signInFacebook() {
@@ -148,5 +160,18 @@ public class Application extends UserProfileController<CommonProfile> {
 			return "Logged in as " + profile.getDisplayName();
 		}
 		return "Something went wrong";
+	}
+
+	private Minesweeper getMsInstanceFromUser()	{
+		CommonProfile profile = getUserProfile();
+		if(profile == null)	{
+			return null;
+		}
+		String userId = profile.getId();
+		if(userMsInstanceMap.containsKey(userId))	{
+			return userMsInstanceMap.get(userId);
+		}
+		userMsInstanceMap.put(userId, Minesweeper.getInstance());
+		return userMsInstanceMap.get(userId);
 	}
 }
