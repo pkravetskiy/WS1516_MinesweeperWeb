@@ -33,7 +33,6 @@ app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
     };
 
     sock.onmessage = function(message) {
-      alert("HALLOOOOO");
       listener(message);
       $scope.playingField = JSON.parse(message.data);
       $scope.$apply();
