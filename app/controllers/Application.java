@@ -112,6 +112,8 @@ public class Application extends UserProfileController<CommonProfile> {
     public WebSocket<String> sockHandler() {
 			Minesweeper minesweeper = getMsInstanceFromUser();
 			IController controller = minesweeper.getTui().getController();
+			String loginStatus = getLoginStatus();
+
 			return new WebSocket<String>() {
           // called when the websocket is established
           public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
@@ -124,7 +126,7 @@ public class Application extends UserProfileController<CommonProfile> {
                       out.write(test);
                 }
              });
-						 out.write("First Message");
+						 out.write(loginStatus);
         }
     	};
   	}
