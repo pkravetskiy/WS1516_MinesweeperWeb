@@ -41,7 +41,7 @@ public class SecurityModule extends AbstractModule {
     // HTTP
     final FormClient formClient = new FormClient("/", new SimpleUserPassAuthenticator());
 
-    Clients clients = new Clients("http://localhost:9000/callback", facebookClient, gitHubClient, formClient);
+    Clients clients = new Clients("https://minesweeper-web.herokuapp.com/callback", facebookClient, gitHubClient, formClient);
 
     Config config = new Config(clients);
     config.addAuthorizer("admin", new RequireAnyRoleAuthorizer("ROLE_ADMIN"));
