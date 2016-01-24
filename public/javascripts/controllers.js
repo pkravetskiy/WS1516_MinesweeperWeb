@@ -16,6 +16,46 @@ app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
   };
   removeFlags();
 
+  // Cookies functions
+  var setCookie = function (cname, cvalue) {
+    var d = new Date();
+    // 30 days expiration
+    d.setTime(d.getTime() + (30*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+  };
+
+  var delCookie = function (cname) {
+    document.cookie = cname + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  };
+
+  var getCookie = function (cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0)==' ') c = c.substring(1);
+      if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return "";
+  };
+
+  var init_cookies = function() {
+    var cookie = getCookie('tries');
+    if (cookie == "")
+      setCookie('tries', '0');
+    cookie = getCookie('wins');
+    if (cookie == "")
+      setCookie('wins', '0');
+    cookie = getCookie('loses');
+    if (cookie == "")
+      setCookie('loses', '0');
+    cookie = getCookie('modal_shown');
+    if (cookie == "")
+      setCookie('modal_shown', '0');
+  };
+  init_cookies();
+
   $http.get('/json').success(function(data) {
     $scope.playingField = data;
 
@@ -25,6 +65,20 @@ app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
         $scope.victory = data.victory;
         $scope.lose = data.loose;
         $scope.playingField = data;
+        var tmp = parseInt(getCookie('tries')) + 1;
+        if ($scope.victory) {
+          setCookie('tries', tmp.toString());
+          document.getElementById('tries').textContent = tmp.toString();
+          tmp = parseInt(getCookie('wins')) + 1;
+          setCookie('wins', tmp.toString());
+          document.getElementById('wins').textContent = tmp.toString();
+        } else if ($scope.lose) {
+          setCookie('tries', tmp.toString());
+          document.getElementById('tries').textContent = tmp.toString();
+          tmp = parseInt(getCookie('loses')) + 1;
+          setCookie('loses', tmp.toString());
+          document.getElementById('loses').textContent = tmp.toString();
+        }
       });
       $scope.loading = false;
     };
@@ -41,6 +95,9 @@ app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
       document.getElementById('result').innerHTML = 'You win!';
     else if ($scope.lose)
       document.getElementById('result').innerHTML = 'You lose!';
+    document.getElementById('tries').textContent = getCookie('tries');
+    document.getElementById('wins').textContent = getCookie('wins');
+    document.getElementById('loses').textContent = getCookie('loses');
     $scope.showModal = !$scope.showModal;
   };
 
@@ -67,6 +124,7 @@ app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
 
     $scope.sendRequest =  function(request) {
       if (request != 'u' || request != 'r')
+          setCookie('tries', (parseInt(getCookie('tries')) + 1).toString());
           removeFlags();
       $scope.loading = true;
       var defer = $q.defer();

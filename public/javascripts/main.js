@@ -1,13 +1,4 @@
 function statistic() {
-  // remove header on the modal window
-  //var elem = document.getElementById('header');
-  //if (elem != null)
-  //  elem.parentNode.removeChild(elem);
-  // remove restart button on the modal window footer
-  //elem = document.getElementById('restart');
-  //if (elem != null)
-  //  elem.parentNode.removeChild(elem);
-  // update values for statistic
   document.getElementById('tries').textContent = getCookie('tries');
   document.getElementById('wins').textContent = getCookie('wins');
   document.getElementById('loses').textContent = getCookie('loses');

@@ -26,6 +26,7 @@
   function sendNav(command) {
     if (command != 'u' || command != 'r')
       setCookie('modal_shown', '0');
+      setCookie('tries', (parseInt(getCookie('tries')) + 1).toString());
       removeFlags();
     sock.send(command);
   }
