@@ -1,5 +1,5 @@
 <script type="text/ng-template" id="coverredCell.html">
 <div class="key" ng-click="cellclicked(column.row, column.column)" ng-style="mouse" ng-mouseenter="hover(true)" ng-mouseleave="hover(false)" id="{{'cell_' + column.row + '-' + column.column}}">
-
+    <img id="{{'flag_' + column.row + '-' + column.column}}" ng-show="flags[column.row][column.column]" style="margin-top: 8px" class="ng-scope" align="middle" height="27" width="27" src="../images/flag.png">
 </div>
 </script>

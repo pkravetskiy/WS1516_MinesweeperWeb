@@ -4,14 +4,17 @@ import org.pac4j.core.client.Clients;
 import com.google.inject.AbstractModule;
 import org.pac4j.oauth.client.FacebookClient;
 import org.pac4j.oauth.client.GitHubClient;
+import org.pac4j.http.client.indirect.FormClient;
+import org.pac4j.http.credentials.authenticator.test.SimpleTestUsernamePasswordAuthenticator;
 import org.pac4j.core.client.Clients;
 import org.pac4j.core.config.Config;
 import org.pac4j.core.authorization.RequireAnyRoleAuthorizer;
 import org.pac4j.play.http.DefaultHttpActionAdapter;
+import org.pac4j.play.ApplicationLogoutController;
+import org.pac4j.play.CallbackController;
 import controllers.HttpActionAdapter;
 import play.Configuration;
 import play.Environment;
-
 
 public class SecurityModule extends AbstractModule {
 
@@ -26,6 +29,7 @@ public class SecurityModule extends AbstractModule {
   @Override
   protected void configure() {
 
+    // OAuth
     final String fbId = configuration.getString("fbId");
     final String fbSecret = configuration.getString("fbSecret");
     FacebookClient facebookClient = new FacebookClient(fbId, fbSecret);
@@ -34,12 +38,24 @@ public class SecurityModule extends AbstractModule {
     final String ghSecret = configuration.getString("ghSecret");
     GitHubClient gitHubClient = new GitHubClient(ghId, ghSecret);
 
-    Clients clients = new Clients("https://minesweeper-web.herokuapp.com/callback", facebookClient, gitHubClient);
+    // HTTP
+    final FormClient formClient = new FormClient("/", new SimpleUserPassAuthenticator());
+
+    Clients clients = new Clients("http://localhost:9000/callback", facebookClient, gitHubClient, formClient);
 
     Config config = new Config(clients);
     config.addAuthorizer("admin", new RequireAnyRoleAuthorizer("ROLE_ADMIN"));
     //config.addAuthorizer("custom", new CustomAuthorizer());
     config.setHttpActionAdapter(new HttpActionAdapter());
     bind(Config.class).toInstance(config);
+
+    // callback
+    final CallbackController callbackController = new CallbackController();
+    callbackController.setDefaultUrl("/");
+    bind(CallbackController.class).toInstance(callbackController);
+    // logout
+    final ApplicationLogoutController logoutController = new ApplicationLogoutController();
+    logoutController.setDefaultUrl("/");
+    bind(ApplicationLogoutController.class).toInstance(logoutController);
   }
 }
