@@ -11,7 +11,8 @@ libraryDependencies ++= Seq(
   cache,
   javaWs,
   "org.pac4j" % "play-pac4j-java" % "2.1.0-SNAPSHOT",
-  "org.pac4j" % "pac4j-oauth" % "1.8.3"
+  "org.pac4j" % "pac4j-oauth" % "1.8.3",
+  "org.pac4j" % "pac4j-http" % "1.8.3"
 )
 
 resolvers ++= Seq( Resolver.mavenLocal,
@@ -21,6 +22,9 @@ resolvers ++= Seq( Resolver.mavenLocal,
 // Play provides two styles of routers, one expects its actions to be injected, the
 // other, legacy style, accesses its actions statically.
 routesGenerator := InjectedRoutesGenerator
+
+
+fork in run := true
 
 
 fork in run := true

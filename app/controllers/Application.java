@@ -4,6 +4,8 @@ import org.pac4j.play.java.RequiresAuthentication;
 import org.pac4j.play.java.UserProfileController;
 import org.pac4j.core.profile.CommonProfile;
 
+import org.pac4j.http.client.indirect.FormClient;
+import org.pac4j.core.profile.CommonProfile;
 import play.data.Form;
 import play.mvc.*;
 import play.twirl.api.Html;
@@ -22,16 +24,20 @@ import akka.actor.*;
 import play.libs.F.*;
 
 public class Application extends UserProfileController<CommonProfile> {
-	private Minesweeper minesweeper = Minesweeper.getInstance();
-	private IController controller = minesweeper.getTui().getController();
 
-	@RequiresAuthentication(clientName = "GitHubClient,FacebookClient")
+	private HashMap<String, Minesweeper> userMsInstanceMap = new HashMap<String, Minesweeper>();
+
+	//@RequiresAuthentication(clientName = "GitHubClient,FacebookClient")
+	@RequiresAuthentication(clientName = "FormClient")
   public Result index() {
-		System.out.println(json());
-    return ok(views.html.index.render("Minesweeper", controller));
+		Minesweeper minesweeper = getMsInstanceFromUser();
+		IController controller = minesweeper.getTui().getController();
+    return ok(views.html.index.render("Minesweeper", controller, getLoginStatus()));
   }
 
   public Result commandline(String command) {
+		Minesweeper minesweeper = getMsInstanceFromUser();
+		IController controller = minesweeper.getTui().getController();
   	minesweeper.getTui().processInputLine(command);
 		if (controller.isVictory()) {
 			command = "Victory!";
@@ -40,11 +46,11 @@ public class Application extends UserProfileController<CommonProfile> {
 		} else {
 			command = "You typed: " + command;
 		}
-  	return ok(views.html.index.render(command, controller));
+  	return ok(views.html.index.render(command, controller, getLoginStatus()));
   }
 
 	public Result about() {
-		return ok(views.html.about.render());
+		return ok(views.html.about.render(getCallbackUrlFormClient(), getLoginStatus()));
 	}
 
 	public Result license() {
@@ -60,6 +66,8 @@ public class Application extends UserProfileController<CommonProfile> {
 	}
 
 	private String jsonStr() {
+		Minesweeper minesweeper = getMsInstanceFromUser();
+		IController controller = minesweeper.getTui().getController();
 		int x = controller.getPlayingField().getLines();
 		int y = controller.getPlayingField().getColumns();
 		Map<String, Object> field[][] = new HashMap[x][y];
@@ -83,6 +91,8 @@ public class Application extends UserProfileController<CommonProfile> {
 		return Json.stringify(Json.toJson(json));
 	}
 	public Result revealField(int row, int column) {
+		Minesweeper minesweeper = getMsInstanceFromUser();
+		IController controller = minesweeper.getTui().getController();
 		if (row < 10 && column < 10) {
 			minesweeper.getTui().processInputLine("0" + row + "-0" + column);
 		} else if (row < 10 && column >= 10) {
@@ -96,31 +106,65 @@ public class Application extends UserProfileController<CommonProfile> {
 	}
 
     public WebSocket<String> sockHandler() {
-        return new WebSocket<String>() {
-            // called when the websocket is established
-            public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
-                // register a callback for processing instream events
-                in.onMessage(new Callback<String>() {
-                    public void invoke(String event) {
-                        System.out.println(event);
-                        minesweeper.getTui().processInputLine(event);
-                        out.write(jsonStr());
-                  }
-               });
-
-              // write out a greeting
-//              out.write(jsonStr());
-          }
-      };
-  }
+			Minesweeper minesweeper = getMsInstanceFromUser();
+			IController controller = minesweeper.getTui().getController();
+			return new WebSocket<String>() {
+          // called when the websocket is established
+          public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
+              // register a callback for processing instream events
+              in.onMessage(new Callback<String>() {
+                  public void invoke(String event) {
+                      minesweeper.getTui().processInputLine(event);
+                      out.write(jsonStr());
+                }
+             });
+        }
+    	};
+  	}
 
 	@RequiresAuthentication(clientName = "FacebookClient")
   public Result signInFacebook() {
-		return ok(views.html.about.render());
+		return ok(views.html.about.render(getCallbackUrlFormClient(), getLoginStatus()));
 	}
 
 	@RequiresAuthentication(clientName = "GitHubClient")
   public Result signInGithub() {
-		return ok(views.html.about.render());
+		return ok(views.html.about.render(getCallbackUrlFormClient(), getLoginStatus()));
+	}
+
+	public Result signInLogin() {
+    return ok(views.html.about.render(getCallbackUrlFormClient(), getLoginStatus()));
+	}
+
+	private String getCallbackUrlFormClient()	{
+		final FormClient formClient = (FormClient) config.getClients().findClient("FormClient");
+		return formClient.getCallbackUrl();
+	}
+
+	private String getLoginStatus()	{
+		CommonProfile profile = getUserProfile();
+		if(profile == null)	{
+			return "Not logged in";
+		}
+		if(profile instanceof org.pac4j.http.profile.HttpProfile)	{
+			return "Logged in as " + profile.getUsername();
+		}
+		if(profile instanceof org.pac4j.oauth.profile.OAuth20Profile)	{
+			return "Logged in as " + profile.getDisplayName();
+		}
+		return "Something went wrong";
+	}
+
+	private Minesweeper getMsInstanceFromUser()	{
+		CommonProfile profile = getUserProfile();
+		if(profile == null)	{
+			return null;
+		}
+		String userId = profile.getId();
+		if(userMsInstanceMap.containsKey(userId))	{
+			return userMsInstanceMap.get(userId);
+		}
+		userMsInstanceMap.put(userId, Minesweeper.getInstance());
+		return userMsInstanceMap.get(userId);
 	}
 }

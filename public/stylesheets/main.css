@@ -1,10 +1,4 @@
-#content-wrap{
-    margin-top: 30px;
-    margin-bottom: 50px;
-    margin-right: 20%;
-    margin-left: 30px;
-    background-color: #f2f2f2;
-}
+
 body {
     background-color: #f2f2f2;
     font-family: "Lato";
@@ -14,6 +8,22 @@ body {
 
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
+}
+
+blockquote {
+    display: block;
+    background-color:#E6E6E6;
+}
+
+.centered {
+    text-align: center;
+}
+
+
+.loading {
+	width:100%;
+	text-align:center;
+	margin-top: 300px;
 }
 
 .key{
@@ -79,43 +89,48 @@ body {
     cursor: default;
 }
 
-#qwerty li a span {
-	display: block;
-	margin: 13px 0 0;
-	text-transform: uppercase;}
 
-/* Titles */
-h1 {
-  text-shadow: 0 0 5px #ddd, 0 0 10px #ddd,
-             0 0 20px #ddd, 0 0 30px #ddd,
-             0 0 40px #ddd;
-  font-family: "Raleway";
-  font-weight: 100;
-  font-size: 80px;
-  text-align: center;
-  color: #ad2b2b;
+.Span {
+  text-decoration: none;
+  display: inline-flex;
+  outline: 0;
 }
-h2, h3, h4, h5, h6 {
+
+.Mine {
+  color: #c0392b;
+  margin-top: -8px;
+}
+
+.Numbers {
+  border-style: inset;
+  color: #3bc492;
+}
+
+.Unrevealed {
+  color: #555;
+}
+
+/* Headers in about page */
+#headerAbout {
     font-family: "Raleway";
     font-weight: 300;
     color: #ad2b2b;
+}
+
+/* Minesweeper field */
+#minesweeperField {
     text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-right: 5%;
+    margin-left: 5%;
 }
 
-
-/* Paragraph & Typographic */
-p {
-    line-height: 28px;
-    margin-bottom: 25px;
-}
-
-.centered {
-    text-align: center;
-}
-
-/* Links */
-a {
-    color: #3bc492;
+/* Minesweeper cells */
+#minesweeperCell {
+    text-decoration: none;
+    outline: 0;
+    color: #c0392b;
     word-wrap: break-word;
     font-size: 20px;
     -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
@@ -125,15 +140,17 @@ a {
     transition: color 0.1s ease-in, background 0.1s ease-in;
 }
 
-a:hover,
-a:focus {
-    color: #c0392b;
+#minesweeperCell :hover {
+  text-decoration: none;
+  outline: 0;
+}
+#minesweeperCell :focus {
     text-decoration: none;
     outline: 0;
 }
 
-a:before,
-a:after {
+#minesweeperCell :before,
+#minesweeperCell :after {
     -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
     -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
     -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
@@ -141,53 +158,59 @@ a:after {
     transition: color 0.1s ease-in, background 0.1s ease-in;
 }
 
-blockquote {
-    display: block;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    margin-left: 80px;
-    margin-right: 80px;
+#content-wrap{
+    margin-top: 30px;
+    margin-bottom: 50px;
+    margin-right: 25%;
+    margin-left: 25%;
+    background-color: #f2f2f2;
 }
 
-/* ==========================================================================
-   Wrap Sections
-   ========================================================================== */
+#qwerty li a span {
+	display: block;
+	margin: 13px 0 0;
+	text-transform: uppercase;}
 
-.Span {
-       display: inline-flex;
-       min-width: 10px;
-       /*border-style: outset;*/
-   }
-
-.Mine {
-  color: #c0392b;
-  margin-top: -8px;
-}
-
-.Numbers {
-  /*padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;*/
-  border-style: inset;
-  /*border-width: 5px;*/
-  color: #3bc492;
-}
-
-.Unrevealed {
-  /*padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;*/
-  /*border-style: groove;*/
-  /*border-width: 5px;*/
-  color: #555;
+/* Titles */
+#minesweeperHeader {
+  text-shadow: 0 0 5px #ddd, 0 0 10px #ddd,
+             0 0 20px #ddd, 0 0 30px #ddd,
+             0 0 40px #ddd;
+  font-family: "Raleway";
+  font-weight: 100;
+  font-size: 80px;
+  text-align: center;
+  color: #ad2b2b;
 }
 
 /* Copyright Wrap */
-
 #c {
 	background: #222222;
 	padding-top: 15px;
 	text-align: right;
+}
+
+#backgroundBody {
+  background-color: #f2f2f2;
+  font-family: "Lato";
+  font-weight: 300;
+  font-size: 16px;
+  color: #555;
+
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+}
+
+#minesweeperFieldAngular {
+  text-decoration: none;
+  outline: 0;
+  margin: 13px 0 0;
+  color: #c0392b;
+  word-wrap: break-word;
+  font-size: 20px;
+  -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+  -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+  -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+  -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+  transition: color 0.1s ease-in, background 0.1s ease-in;
 }

@@ -1,3 +1,5 @@
+@(loginUrl: String, loginStatus : String)
+
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -13,6 +15,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
   </head>
   <body>
+    <!--Upper Navbar-->
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -22,68 +25,99 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li><a href="#" onclick="signin();">Sign in</a></li>
-            <li><a href="/logout">Log out</a></li>
+            <li><a href="/logout?url=/">Log out</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><div style="font-size: 16px; margin: 13px 0 0;">@loginStatus</div></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div>
     </nav>
+
+    <!--Content-->
     <div id="content-wrap">
-    <h1 align=center>Minesweeper</h1>
-    <blockquote cite="https://de.wikipedia.org/wiki/Minesweeper">
-      Minesweeper ist ein zunächst simples, dem Betriebssystem Microsoft Windows bis einschließlich der Version Windows 7 beigelegtes Computerspiel,
-      bei dem der Spieler durch logisches Denken herausfinden muss, hinter welchen Feldern Minen versteckt sind. Als zusätzliche Herausforderung läuft eine Stoppuhr.
-      Das Ziel ist, möglichst schnell alle Felder aufzudecken, hinter welchen keine Minen verborgen sind.<a href="https://de.wikipedia.org/wiki/Minesweeper">1</a>
-    </blockquote>
-    <h2>Ziel des Spiels</h2>
-    Ziel des Spiels ist es, die leeren Quadrate aufzudecken und dabei diejenigen
-    Quadrate zu meiden, hinter denen sich Minen verstecken. Je schneller Sie die leeren
-    Quadrate aufdecken, desto höher Ihre Punktzahl.
-    <h2>Das Spielfeld</h2>
-    Sie können bei Minesweeper unter drei
-    Standardspielfeldern mit unterschiedlicher Schwierigkeitsstufe wählen.
-    <ul>
-      <li>
-        <b>Small</b>: 81 Quadrate, 10 Minen
-      </li>
-      <li>
-        <b>Medium</b>: 256 Quadrate, 40 Minen
-      </li>
-      <li>
-        <b>Large</b>: 480 Quadrate, 99 Minen
-      </li>
-    </ul>
-    <h2>Spileweise</h2>
-    Die Minesweeper-Regeln sind einfach:
-    <ul>
-      <li>
-        Das Spiel ist beendet, wenn eine Mine aufgedeckt wird.
-      </li>
-      <li>
-        Das Spiel wird fortgesetzt, wenn Sie ein leeres Quadrat aufdecken.
-      </li>
-      <li>
-        Wird beim Aufdecken eines Quadrats eine Zahl angezeigt, steht diese für die Anzahl der Minen, die in den benachbarten acht Quadraten verborgen sind. Anhand dieser Angabe kann abgeleitet werden, unter welchen der angrenzenden Quadrate sich Minen befinden und auf welche Quadrate gefahrlos geklickt werden kann.
-      </li>
-    </ul>
-    <h2>Zum Spiel</h2>
-    <ul>
-      <li>
-        <a href="/index">Standard JavaScript Version</a>
-      </li>
-      <li>
-        <a href="/assets/html/minesweeper.html">Angular.js Version</a>
-      </li>
-      <li>
-        <a href="/">Polymer Version</a>
-      </li>
-    </ul>
+      <h1 id="minesweeperHeader" align=center>Minesweeper</h1>
+      <blockquote cite="https://de.wikipedia.org/wiki/Minesweeper">
+        Minesweeper ist ein zunächst simples, dem Betriebssystem Microsoft Windows bis einschließlich der Version Windows 7 beigelegtes Computerspiel,
+        bei dem der Spieler durch logisches Denken herausfinden muss, hinter welchen Feldern Minen versteckt sind. Als zusätzliche Herausforderung läuft eine Stoppuhr.
+        Das Ziel ist, möglichst schnell alle Felder aufzudecken, hinter welchen keine Minen verborgen sind.<a href="https://de.wikipedia.org/wiki/Minesweeper">1</a>
+      </blockquote>
+      <h2 id="headerAbout">Ziel des Spiels</h2>
+      Ziel des Spiels ist es, die leeren Quadrate aufzudecken und dabei diejenigen
+      Quadrate zu meiden, hinter denen sich Minen verstecken. Je schneller Sie die leeren
+      Quadrate aufdecken, desto höher Ihre Punktzahl.
+      <h2 id="headerAbout">Das Spielfeld</h2>
+      Sie können bei Minesweeper unter drei
+      Standardspielfeldern mit unterschiedlicher Schwierigkeitsstufe wählen.
+      <ul>
+        <li>
+          <b>Small</b>: 81 Quadrate, 10 Minen
+        </li>
+        <li>
+          <b>Medium</b>: 256 Quadrate, 40 Minen
+        </li>
+        <li>
+          <b>Large</b>: 480 Quadrate, 99 Minen
+        </li>
+      </ul>
+      <h2 id="headerAbout">Spileweise</h2>
+      Die Minesweeper-Regeln sind einfach:
+      <ul>
+        <li>
+          Das Spiel ist beendet, wenn eine Mine aufgedeckt wird.
+        </li>
+        <li>
+          Das Spiel wird fortgesetzt, wenn Sie ein leeres Quadrat aufdecken.
+        </li>
+        <li>
+          Wird beim Aufdecken eines Quadrats eine Zahl angezeigt, steht diese für die Anzahl der Minen, die in den benachbarten acht Quadraten verborgen sind. Anhand dieser Angabe kann abgeleitet werden, unter welchen der angrenzenden Quadrate sich Minen befinden und auf welche Quadrate gefahrlos geklickt werden kann.
+        </li>
+      </ul>
+      <h2 id="headerAbout">Zum Spiel</h2>
+      <ul>
+        <li>
+          <a style="text-decoration:none" href="/index">Play/JavaScript Version</a>
+        </li>
+        <li>
+          <a style="text-decoration:none" href="/assets/html/minesweeper.html">Angular.js Version</a>
+        </li>
+        <li>
+          <a style="text-decoration:none" href="/assets/polymer/index.html">Polymer Version</a>
+        </li>
+      </ul>
     </div>
+
+    <!--Lower Navbar-->
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <div class="container">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/license" >License</a></li>
+          <li><a target="_blank" href="https://github.com/pkravetskiy/WS1516_MinesweeperWeb">Github</a></li>
+          <li><a href="/authors">Authors</a></li>
+        </ul>
+      </div>
+    </nav>
 
     <!-- Sign in modal dialog -->
     <div class="modal fade" id="game_end" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
       <div class="modal-dialog modal-sm">
           <div class="modal-content">
             <div class="modal-header" id="header">
+              <form action="@loginUrl" method="POST">
+                <div id="box1">
+                  Benutzername:<br>
+              	   <input type="text" name="username" value=""/>
+                </div>
+              	<p />
+                <div>
+                    Passwort:<br>
+              	   <input type="password" name="password" value="" />
+                </div>
+              	<p />
+                <div>
+              	   <input type="submit" name="submit" value="Submit" />
+                </div>
+              </form>
             </div>
             <div class="modal-body">
               <a class="btn btn-block btn-social btn-facebook" href="/signInFacebook">
@@ -99,6 +133,5 @@
           </div>
       </div>
     </div>
-
   </body>
 </html>
