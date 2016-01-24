@@ -60,6 +60,9 @@ app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
     $scope.playingField = data;
 
     $scope.cellclicked = function( row, column) {
+      if ($scope.victory || $scope.lose) {
+        return;
+      }
       $scope.loading = true;
       $http.get('/json/'+row+'/'+column).success(function(data) {
         $scope.victory = data.victory;
@@ -117,17 +120,26 @@ app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
     };
 
     sock.onmessage = function(message) {
-      alert("HALLOOOOO");
+      console.log("Got message", message.data);
       listener(message);
-      $scope.playingField = JSON.parse(message.data);
+      try {
+        $scope.playingField = JSON.parse(message.data);
+      }
+      catch(e)  {
+        $scope.loginStatus = message.data;
+      }
       $scope.$apply();
       $scope.loading = false;
     };
 
     $scope.sendRequest =  function(request) {
-      if (request != 'u' || request != 'r')
-          setCookie('tries', (parseInt(getCookie('tries')) + 1).toString());
-          removeFlags();
+      if (request != 'u' || request != 'r') {
+        setCookie('tries', (parseInt(getCookie('tries')) + 1).toString());
+        removeFlags();
+        $scope.victory = false;
+        $scope.lose = false;
+      }
+
       $scope.loading = true;
       var defer = $q.defer();
       var callbackId = getCallbackId();

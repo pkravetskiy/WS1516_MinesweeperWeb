@@ -67,11 +67,15 @@ public class Application extends UserProfileController<CommonProfile> {
 
 	private String jsonStr() {
 		Minesweeper minesweeper = getMsInstanceFromUser();
+		return jsonStr(minesweeper);
+	}
+
+	private String jsonStr(Minesweeper minesweeper) {
 		IController controller = minesweeper.getTui().getController();
+
 		int x = controller.getPlayingField().getLines();
 		int y = controller.getPlayingField().getColumns();
 		Map<String, Object> field[][] = new HashMap[x][y];
-
 		for (int i=0; i < x; i++) {
 			for (int j=0; j < y; j++) {
 				field[i][j] = new HashMap<String, Object>();
@@ -87,9 +91,9 @@ public class Application extends UserProfileController<CommonProfile> {
 		json.put("victory", new Boolean(controller.isVictory()));
 		json.put("loose", new Boolean(controller.isGameOver()));
 		json.put("field", field);
-
 		return Json.stringify(Json.toJson(json));
 	}
+
 	public Result revealField(int row, int column) {
 		Minesweeper minesweeper = getMsInstanceFromUser();
 		IController controller = minesweeper.getTui().getController();
@@ -108,16 +112,21 @@ public class Application extends UserProfileController<CommonProfile> {
     public WebSocket<String> sockHandler() {
 			Minesweeper minesweeper = getMsInstanceFromUser();
 			IController controller = minesweeper.getTui().getController();
+			String loginStatus = getLoginStatus();
+
 			return new WebSocket<String>() {
           // called when the websocket is established
           public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
               // register a callback for processing instream events
               in.onMessage(new Callback<String>() {
                   public void invoke(String event) {
+											System.out.println(event);
                       minesweeper.getTui().processInputLine(event);
-                      out.write(jsonStr());
+											String test = jsonStr(minesweeper);
+                      out.write(test);
                 }
              });
+						 out.write(loginStatus);
         }
     	};
   	}
@@ -161,6 +170,10 @@ public class Application extends UserProfileController<CommonProfile> {
 			return null;
 		}
 		String userId = profile.getId();
+		return getMsInstanceFromUser(userId);
+	}
+
+	private Minesweeper getMsInstanceFromUser(String userId)	{
 		if(userMsInstanceMap.containsKey(userId))	{
 			return userMsInstanceMap.get(userId);
 		}
