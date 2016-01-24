@@ -33,10 +33,18 @@
             <li><a href="#" ng-click="sendRequest('sM')">Medium</a></li>
             <li><a href="#" ng-click="sendRequest('sL')">Large</a></li>
           </ul>
-          <li><a href="#" ng-click="sendRequest('u')">Undo</a></li>
-          <li><a href="#" ng-click="sendRequest('r')">Redo</a></li>
-          <li><a href="#" ng-click="showResults();">Statistic</a></li>
-          <li><a href="/">About</a></li>
+        <li><a href="#" ng-click="sendRequest('u')">Undo</a></li>
+        <li><a href="#" ng-click="sendRequest('r')">Redo</a></li>
+        <li><a href="#" ng-click="toggleModal()">Statistic</a></li>
+        <li><a href="/">About</a></li>
+        <!-- Statistics modal -->
+        <div class="container">
+          <modal title="Statistics" visible="showModal">
+            <div class="modal-dialog modal-sm">
+              <h1 id="result" style="font-size: 36px;"></h1>
+            </div>
+          </modal>
+        </div>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
