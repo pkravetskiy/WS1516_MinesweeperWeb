@@ -119,7 +119,12 @@ app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
     sock.onmessage = function(message) {
       console.log("Got message", message.data);
       listener(message);
-      $scope.playingField = JSON.parse(message.data);
+      try {
+        $scope.playingField = JSON.parse(message.data);
+      }
+      catch(e)  {
+        $scope.loginStatus = message.data;
+      }
       $scope.$apply();
       $scope.loading = false;
     };
