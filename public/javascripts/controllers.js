@@ -117,7 +117,7 @@ app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
     };
 
     sock.onmessage = function(message) {
-      alert("HALLOOOOO");
+      console.log("Got message", message.data);
       listener(message);
       $scope.playingField = JSON.parse(message.data);
       $scope.$apply();
