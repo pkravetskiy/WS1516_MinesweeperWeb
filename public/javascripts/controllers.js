@@ -72,12 +72,14 @@ app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
           tmp = parseInt(getCookie('wins')) + 1;
           setCookie('wins', tmp.toString());
           document.getElementById('wins').textContent = tmp.toString();
+          $scope.toggleModal();
         } else if ($scope.lose) {
           setCookie('tries', tmp.toString());
           document.getElementById('tries').textContent = tmp.toString();
           tmp = parseInt(getCookie('loses')) + 1;
           setCookie('loses', tmp.toString());
           document.getElementById('loses').textContent = tmp.toString();
+          $scope.toggleModal();
         }
       });
       $scope.loading = false;
