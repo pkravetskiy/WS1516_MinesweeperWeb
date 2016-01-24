@@ -1,12 +1,12 @@
 function statistic() {
   // remove header on the modal window
-  var elem = document.getElementById('header');
-  if (elem != null)
-    elem.parentNode.removeChild(elem);
+  //var elem = document.getElementById('header');
+  //if (elem != null)
+  //  elem.parentNode.removeChild(elem);
   // remove restart button on the modal window footer
-  elem = document.getElementById('restart');
-  if (elem != null)
-    elem.parentNode.removeChild(elem);
+  //elem = document.getElementById('restart');
+  //if (elem != null)
+  //  elem.parentNode.removeChild(elem);
   // update values for statistic
   document.getElementById('tries').textContent = getCookie('tries');
   document.getElementById('wins').textContent = getCookie('wins');
@@ -119,7 +119,7 @@ window.onload = function() {
     for (var j = 16; j > 0; j--) {
       var elem = $('#' + i + '-' + j);
       var flag_id = 'flag_' + i + '-' + j;
-      if (elem.length && getCookie(flag_id).length) {
+      if (elem.length && getCookie(flag_id).length && !elem.parent().hasClass('not_active')) {
         elem.append('<img id="' + flag_id + '" style="margin-left: -13px" class="Mine" align="middle" height="27" width="27" src="assets/images/flag.png">');
       }
     }
