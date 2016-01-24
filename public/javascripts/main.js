@@ -55,6 +55,10 @@ function setCookie(cname, cvalue) {
   document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
+function delCookie(cname) {
+  document.cookie = cname + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
 function getCookie(cname) {
   var name = cname + "=";
   var ca = document.cookie.split(';');
@@ -64,6 +68,14 @@ function getCookie(cname) {
     if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
   }
   return "";
+}
+
+function removeFlags() {
+  for (var i = 30; i > 0; i-- ) {
+    for (var j = 16; j > 0; j--) {
+      delCookie('flag_' + i + '-' + j);
+    }
+  }
 }
 
 (function () {
@@ -83,11 +95,14 @@ function getCookie(cname) {
 
 window.onload = function() {
   $("a[name='buttons']").bind("contextmenu", function(event){
-    if (event.which == 3 && !($("#flag").length)) {
-      $(this).append('<img id="flag" style="margin-top: -30px" class="Mine" align="middle" height="27" width="27" src="assets/images/flag.png">');
+    var flag_id = 'flag_' + $(this).children()[0].id;
+    if (event.which == 3 && !($('#' + flag_id).length)) {
+      $('#'+$(this).children()[0].id).append('<img id="' + flag_id + '" style="margin-left: -13px" class="Mine" align="middle" height="27" width="27" src="assets/images/flag.png">');
+      setCookie(flag_id, '+');
       return false;
-    } else if (event.which == 3 && ($("#flag").length)) {
-      $("#flag").remove();
+    } else if (event.which == 3 && $('#' + flag_id).length) {
+      $('#'+flag_id).remove();
+      setCookie(flag_id, '');
       return false;
     }
   });
@@ -98,4 +113,15 @@ window.onload = function() {
       $(this).css("background", "#eff0f2").dequeue();
     });
   });
+
+  // set flags
+  for (var i = 30; i > 0; i--) {
+    for (var j = 16; j > 0; j--) {
+      var elem = $('#' + i + '-' + j);
+      var flag_id = 'flag_' + i + '-' + j;
+      if (elem.length && getCookie(flag_id).length) {
+        elem.append('<img id="' + flag_id + '" style="margin-left: -13px" class="Mine" align="middle" height="27" width="27" src="assets/images/flag.png">');
+      }
+    }
+  }
 };
