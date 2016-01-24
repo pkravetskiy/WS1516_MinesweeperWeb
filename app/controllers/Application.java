@@ -27,9 +27,6 @@ public class Application extends UserProfileController<CommonProfile> {
 
 	private HashMap<String, Minesweeper> userMsInstanceMap = new HashMap<String, Minesweeper>();
 
-	//private Minesweeper minesweeper = Minesweeper.getInstance();
-	//private IController controller = minesweeper.getTui().getController();
-
 	//@RequiresAuthentication(clientName = "GitHubClient,FacebookClient")
 	@RequiresAuthentication(clientName = "FormClient")
   public Result index() {
@@ -111,20 +108,16 @@ public class Application extends UserProfileController<CommonProfile> {
     public WebSocket<String> sockHandler() {
 			Minesweeper minesweeper = getMsInstanceFromUser();
 			IController controller = minesweeper.getTui().getController();
-      return new WebSocket<String>() {
+			return new WebSocket<String>() {
           // called when the websocket is established
           public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
               // register a callback for processing instream events
               in.onMessage(new Callback<String>() {
                   public void invoke(String event) {
-                      System.out.println(event);
                       minesweeper.getTui().processInputLine(event);
                       out.write(jsonStr());
                 }
              });
-
-            // write out a greeting
-						//out.write(jsonStr());
         }
     	};
   	}

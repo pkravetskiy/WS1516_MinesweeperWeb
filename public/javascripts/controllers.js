@@ -25,7 +25,6 @@ app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
     // Create a unique callback ID to map requests to responses
     var currentCallbackId = 0;
     // Create our websocket object with the address to the websocket
-
     var ws = window['MozWebSocket'] ? MozWebSocket : WebSocket;
     var sock = new ws("ws://localhost:9000/greeter");
 
@@ -34,6 +33,7 @@ app.controller('fieldCtrl', function ($scope, $http, $rootScope, $q) {
     };
 
     sock.onmessage = function(message) {
+      alert("HALLOOOOO");
       listener(message);
       $scope.playingField = JSON.parse(message.data);
       $scope.$apply();

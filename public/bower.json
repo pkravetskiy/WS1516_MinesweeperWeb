@@ -1,0 +1,21 @@
+{
+  "name": "WS1516_MinesweeperWeb",
+  "homepage": "https://github.com/pkravetskiy/WS1516_MinesweeperWeb",
+  "authors": [
+    "D-Hahn <nonPublic@nonPublic.com>"
+  ],
+  "description": "Study project",
+  "main": "Dunno",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#1.2.0"
+  }
+}
