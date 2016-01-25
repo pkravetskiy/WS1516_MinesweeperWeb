@@ -5,6 +5,8 @@
 # Home page
 GET     /                           controllers.Application.about()
 GET     /index                      controllers.Application.index()
+GET     /angular                    controllers.Application.angular()
+GET     /polymer                    controllers.Application.polymer()
 GET     /license                    controllers.Application.license()
 GET     /authors                    controllers.Application.authors()
 GET     /json                       controllers.Application.json()

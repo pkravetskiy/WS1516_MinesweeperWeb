@@ -29,53 +29,7 @@
             <li><a href="/logout?url=/">Log out</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li>
-              <div class="mobile-social-share">
-                <div id="socialShare" class="btn-group share-group">
-                  <a data-toggle="dropdown" class="btn btn-info" style="background-color: #ad2b2b; border-color: #ad2b2b;">
-                    <i class="fa fa-share-alt fa-inverse"></i>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a data-original-title="Twitter" rel="tooltip" onclick="window.open(
-                              'https://twitter.com/home?status=https%3A//minesweeper-web.herokuapp.com/',
-                              'facebook-share-dialog',
-                              'width=626,height=436,top='+((screen.height - 436) / 2)+',left='+((screen.width - 626)/2 ));
-                      return false;" href="#" class="btn btn-twitter" data-placement="left">
-                        <i class="fa fa-twitter"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a data-original-title="Facebook" rel="tooltip"  onclick="window.open(
-                              'https://www.facebook.com/sharer/sharer.php?u=https%3A//minesweeper-web.herokuapp.com/',
-                              'facebook-share-dialog',
-                              'width=626,height=436,top='+((screen.height - 436) / 2)+',left='+((screen.width - 626)/2 ));
-                      return false;" href="#" class="btn btn-facebook" data-placement="left">
-                        <i class="fa fa-facebook"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a data-original-title="Google+" rel="tooltip" onclick="window.open(
-                              'https://plus.google.com/share?url=https%3A//minesweeper-web.herokuapp.com/',
-                              'facebook-share-dialog',
-                              'width=626,height=436,top='+((screen.height - 436) / 2)+',left='+((screen.width - 626)/2 ));
-                      return false;" href="#" class="btn btn-google" data-placement="left">
-                        <i class="fa fa-google-plus"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a data-original-title="LinkedIn" rel="tooltip" onclick="window.open(
-                              'https://www.linkedin.com/shareArticle?mini=true&url=https%3A//minesweeper-web.herokuapp.com/&title=&summary=&source=',
-                              'facebook-share-dialog',
-                              'width=626,height=436,top='+((screen.height - 436) / 2)+',left='+((screen.width - 626)/2 ));
-                      return false;" href="#" class="btn btn-linkedin" data-placement="left">
-                        <i class="fa fa-linkedin"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </li>
+          @social()
             <li><div style="font-size: 16px; margin: 19px 0 0;">@loginStatus</div></li>
           </ul>
         </div><!-- /.navbar-collapse -->
@@ -127,24 +81,15 @@
           <a style="text-decoration:none" href="/index">Play/JavaScript Version</a>
         </li>
         <li>
-          <a style="text-decoration:none" href="/assets/html/minesweeper.html">Angular.js Version</a>
+          <a style="text-decoration:none" href="/angular">Angular.js Version</a>
         </li>
         <li>
-          <a style="text-decoration:none" href="/assets/polymer/index.html">Polymer Version</a>
+          <a style="text-decoration:none" href="/polymer">Polymer Version</a>
         </li>
       </ul>
     </div>
 
-    <!--Lower Navbar-->
-    <nav class="navbar navbar-default navbar-fixed-bottom">
-      <div class="container">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/license" >License</a></li>
-          <li><a target="_blank" href="https://github.com/pkravetskiy/WS1516_MinesweeperWeb">Github</a></li>
-          <li><a href="/authors">Authors</a></li>
-        </ul>
-      </div>
-    </nav>
+    @footer()
 
     <!-- Sign in modal dialog -->
     <div class="modal fade" id="game_end" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
