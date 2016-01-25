@@ -127,6 +127,7 @@ public class Application extends UserProfileController<CommonProfile> {
                 }
              });
 						 out.write(loginStatus);
+						 out.write(jsonStr(minesweeper));
         }
     	};
   	}

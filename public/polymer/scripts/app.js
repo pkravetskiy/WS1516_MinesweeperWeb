@@ -10,8 +10,10 @@ sock.onopen = function(){
 };
 
 sock.onmessage = function(message) {
+  console.log('Got message', message.data);
   try {
-    document.querySelector('minesweeper-field').grid = JSON.parse(message.data).field;
+    fieldN = JSON.parse(message.data).field;
+    setTimeout(function(){ document.querySelector('minesweeper-field').grid = fieldN; }, 500);
   }
   catch(e)  {
     // Wait until DOM is loaded, probaly bad
@@ -22,4 +24,16 @@ sock.onmessage = function(message) {
 sendRequest =  function(request) {
   console.log('Sending request', request);
   sock.send(request);
+};
+
+revealField =  function(row, column) {
+  if (row < 10 && column < 10) {
+    sendRequest("0" + row + "-0" + column);
+  } else if (row < 10 && column >= 10) {
+    sendRequest("0" + row + "-" + column);
+  } else if (row >= 10 && column < 10) {
+    sendRequest(row + "-0" + column);
+  } else {
+    sendRequest(row + "-" + column);
+  }
 };

@@ -1,5 +1,4 @@
-<link rel="import"
-      href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 
 <dom-module id="my-element">
   <style>
@@ -46,7 +45,7 @@
       <div id="row">
         <template is="dom-repeat" items="{{item}}">
           <div id="column">
-            <minesweeper-cell isrevealed="{{item.isRevealed}}" column="{{item.column}}" row="{{item.row}}" valu="{{item.value}}"></minesweeper-cell>
+            <minesweeper-cell isrevealed="{{item.isrevealed}}" column="{{item.column}}" row="{{item.row}}" valu="{{item.value}}"></minesweeper-cell>
           </div>
         </template>
       </div>
@@ -67,7 +66,11 @@
 
   </style>
   <template>
-    <div id="{{row}}-{{column}}">{{valu}}</div>
+    <paper-button raised id="{{row}}-{{column}}">
+      <template is="dom-if" if="{{isrevealed}}">
+        <div>{{valu}}</div>
+      </template>
+    </paper-button>
   </template>
   <script>
     Polymer({
@@ -77,6 +80,12 @@
         this.column = null;
         this.row = null;
         this.valu = null;
+      },
+      listeners: {
+        'tap': 'regularTap',
+      },
+      regularTap: function(e) {
+        revealField(this.row, this.column);
       }
     });
   </script>
