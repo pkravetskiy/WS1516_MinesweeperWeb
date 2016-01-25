@@ -44,12 +44,57 @@
         </template>
       </h1>
     </div>
+
+    <paper-dialog id="dialog">
+      <h2>Game Over!!!</h2>
+      <p>{{winlose}}</p>
+      <div class="buttons">
+        <paper-button dialog-dismiss>Close</paper-button>
+        <paper-button onclick="sendRequest('n')" dialog-confirm autofocus>Restart</paper-button>
+      </div>
+    </paper-dialog>
   </template>
   <script>
     Polymer({
       is: 'minesweeper-field',
+
+      properties: {
+        loose: {
+          type: Boolean,
+          value: false,
+          observer: '_looseChanged'
+        },
+        victory: {
+          type: Boolean,
+          value: false,
+          observer: '_victoryChanged'
+        }
+      },
       ready: function() {
         this.grid = null;
+        this.victory = false;
+        this.loose = false;
+        this.winlose = "";
+      },
+      _looseChanged: function(newValue, oldValue) {
+        if(newValue != oldValue)  {
+          if(newValue == true) {
+            if(this.victory == true)  {
+              this.winlose = 'You win!';
+            } else {
+              this.winlose = 'You loose!';
+            }
+            this.$.dialog.toggle();
+          }
+        }
+      },
+      _victoryChanged: function(newValue, oldValue) {
+        if(newValue != oldValue)  {
+          if(newValue == true) {
+            this.winlose = 'You win!';
+            this.$.dialog.toggle();
+          }
+        }
       }
     });
   </script>

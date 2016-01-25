@@ -12,8 +12,12 @@ sock.onopen = function(){
 sock.onmessage = function(message) {
   console.log('Got message', message.data);
   try {
+    victoryN = JSON.parse(message.data).victory;
+    looseN = JSON.parse(message.data).loose;
     fieldN = JSON.parse(message.data).field;
     setTimeout(function(){ document.querySelector('minesweeper-field').grid = fieldN; }, 500);
+    setTimeout(function(){ document.querySelector('minesweeper-field').victory = victoryN; }, 500);
+    setTimeout(function(){ document.querySelector('minesweeper-field').loose = looseN; }, 500);
   }
   catch(e)  {
     // Wait until DOM is loaded, probaly bad
