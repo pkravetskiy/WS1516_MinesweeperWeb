@@ -1,49 +1,70 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="scripts/app.js"></script>
     <link rel="import" href="elements.html"></link>
   </head>
   <body  class="fullbleed layout vertical">
     <!--Upper Navbar-->
-    <paper-toolbar id="header">
-      <a href="/">
-        <iron-icon src="../images/minesweepericon.png"></iron-icon>
-        <paper-item>Minesweeper</paper-item>
-      </a>
-      <paper-item>New Game</paper-item>
-      <paper-menu-button>
-        <paper-icon-button icon="menu" class="dropdown-trigger"></paper-icon-button>
-        <paper-menu class="dropdown-content">
-          <paper-button>Restart</paper-button>
-          <paper-button>Small</paper-button>
-          <paper-button>Medium</paper-button>
-          <paper-button>Large</paper-button>
-        </paper-menu>
-      </paper-menu-button>
-      <paper-button>Undo</paper-button>
-      <paper-button>Redo</paper-button>
-      <paper-button>Statistic</paper-button>
-      <a href="/">
-        <paper-item>About</paper-item>
-      </a>
-      <span class="title"></span>
-      <span>TODO LOGINSTATUS<span>
-    </paper-toolbar>
-    <!--Content-->
-    <div flex>LOL</div>
-    <!--Lower navbar-->
-    <paper-toolbar id="footer">
-      <span class="title"></span>
-      <a href="/license">
-        <paper-item>Licenser</paper-item>
-      </a>
-      <a href="https://github.com/pkravetskiy/WS1516_MinesweeperWeb">
-        <paper-item>Github</paper-item>
-      </a>
-      <a href="/authors">
-        <paper-item>Authors</paper-item>
-      </a>
-    </paper-toolbar>
+    <paper-scroll-header-panel fixed>
+      <paper-toolbar>
+        <a href="/">
+          <iron-icon src="../images/minesweepericon.png"></iron-icon>
+          <paper-item>Minesweeper</paper-item>
+        </a>
+        <paper-item>New Game</paper-item>
+        <paper-menu-button>
+          <paper-icon-button icon="menu" class="dropdown-trigger"></paper-icon-button>
+          <paper-menu class="dropdown-content">
+            <paper-button>Restart</paper-button>
+            <paper-button>Small</paper-button>
+            <paper-button>Medium</paper-button>
+            <paper-button>Large</paper-button>
+          </paper-menu>
+        </paper-menu-button>
+        <paper-button>Undo</paper-button>
+        <paper-button>Redo</paper-button>
+        <paper-button>Statistic</paper-button>
+        <a href="/">
+          <paper-item>About</paper-item>
+        </a>
+        <span class="title"></span>
+        <my-element></my-element>
+      </paper-toolbar>
+
+      <div class="content">
+
+        <p>TEST</p>
+        <p>TEST</p>
+        <p>TEST</p>
+        <p>TEST</p>
+        <p>TEST</p>
+        <p>TEST</p>
+        <p>TEST</p>
+        <p>TEST</p>
+        <p>TEST</p>
+        <p>TEST</p>
+
+      </div>
+
+      <!-- TODO: prevent Footer to overlap content -->
+      <div id="footer">
+        <paper-toolbar>
+          <span class="title"></span>
+          <a href="/license">
+            <paper-item>Licenser</paper-item>
+          </a>
+          <a href="https://github.com/pkravetskiy/WS1516_MinesweeperWeb">
+            <paper-item>Github</paper-item>
+          </a>
+          <a href="/authors">
+            <paper-item>Authors</paper-item>
+          </a>
+        </paper-toolbar>
+    </div>
+
+    </paper-scroll-header-panel>
   </body>
 </html>
