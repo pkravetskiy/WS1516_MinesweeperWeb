@@ -27,13 +27,22 @@ public class Application extends UserProfileController<CommonProfile> {
 
 	private HashMap<String, Minesweeper> userMsInstanceMap = new HashMap<String, Minesweeper>();
 
-	//@RequiresAuthentication(clientName = "GitHubClient,FacebookClient")
-	@RequiresAuthentication(clientName = "FormClient")
+	@RequiresAuthentication(clientName = "FacebookClient,GitHubClient,FormClient")
   public Result index() {
 		Minesweeper minesweeper = getMsInstanceFromUser();
 		IController controller = minesweeper.getTui().getController();
     return ok(views.html.index.render("Minesweeper", controller, getLoginStatus()));
   }
+
+	@RequiresAuthentication(clientName = "FacebookClient,GitHubClient,FormClient")
+	public Result angular()	{
+		return redirect(controllers.routes.Assets.at("html/minesweeper.html"));
+	}
+
+	@RequiresAuthentication(clientName = "FacebookClient,GitHubClient,FormClient")
+	public Result polymer()	{
+		return redirect(controllers.routes.Assets.at("polymer/index.html"));
+	}
 
   public Result commandline(String command) {
 		Minesweeper minesweeper = getMsInstanceFromUser();
