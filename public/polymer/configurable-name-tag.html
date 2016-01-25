@@ -27,3 +27,57 @@
   })();
   </script>
 </dom-module>
+
+
+
+<dom-module id="minesweeper-field">
+  <style>
+    #row {
+      display: block
+    }
+
+    #column {
+      display: inline-block
+    }
+  </style>
+  <template>
+    <div> Minesweeper </div>
+    <template is="dom-repeat" items="{{grid}}">
+      <div id="row">
+        <template is="dom-repeat" items="{{item}}">
+          <div id="column">
+            <minesweeper-cell isrevealed="{{item.isRevealed}}" column="{{item.column}}" row="{{item.row}}" valu="{{item.value}}"></minesweeper-cell>
+          </div>
+        </template>
+      </div>
+    </template>
+  </template>
+  <script>
+    Polymer({
+      is: 'minesweeper-field',
+      ready: function() {
+        this.grid = null;
+      }
+    });
+  </script>
+</dom-module>
+
+<dom-module id="minesweeper-cell">
+  <style>
+
+  </style>
+  <template>
+    <div id="{{row}}-{{column}}">{{valu}}</div>
+  </template>
+  <script>
+    Polymer({
+      is: 'minesweeper-cell',
+      ready: function() {
+        this.isrevealed = false;
+        this.column = null;
+        this.row = null;
+        this.valu = null;
+      }
+    });
+  </script>
+</dom-module>
