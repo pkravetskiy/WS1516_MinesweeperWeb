@@ -1,9 +1,12 @@
-<script type="text/ng-template" id="minesweeperField.html">
-<div style="text-align: center">
-  <div ng-show="loading" class="loading"><img src="../images/ajax-loader.gif" width="320"><br><h2>Loading...</h2></div>
-  <ul ng-hide="loading" style="display: table-row; list-style-type: none;">
-    <li ng-repeat="line in playingField.field">
-      <div ng-controller="hoverCtrl" ng-right-click="none()" ng-repeat="column in line" ng-include="'cell.html'" style="float: left;white-space: nowrap;"></div>
-    </li>
-  </ul>
-</center>
+<!--<script type="text/ng-template" id="minesweeperField.html">-->
+  <div type="text/ng-template" id="minesweeperField.html">
+    <center>
+    <div ng-show="loading" class="loading"><img src="../images/ajax-loader.gif" width="320"><br><h2>Loading...</h2></div>
+    <ul ng-hide="loading" style="display: table-row; list-style-type: none;">
+      <li ng-repeat="line in playingField.field">
+        <div ng-controller="hoverCtrl" ng-right-click="none()" ng-repeat="column in line" ng-include="'cell.html'" style="float: left;white-space: nowrap;"></div>
+      </li>
+    </ul>
+    </center>
+  </div>
+<!--</script>-->
