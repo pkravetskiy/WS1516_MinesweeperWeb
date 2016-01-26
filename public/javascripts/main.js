@@ -13,8 +13,8 @@ function result(str) {
   if (getCookie('modal_shown') == "0") {
     document.getElementById('result').textContent = str;
     checkCookies(str);
-    $("#game_end").modal({keyboard: false});
     setCookie('modal_shown', '1');
+    $("#game_end").modal({keyboard: false});
   }
 }
 
