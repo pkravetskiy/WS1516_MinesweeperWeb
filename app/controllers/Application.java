@@ -169,7 +169,7 @@ public class Application extends UserProfileController<CommonProfile> {
 			return "Logged in as " + profile.getUsername();
 		}
 		if(profile instanceof org.pac4j.oauth.profile.OAuth20Profile)	{
-			return "Logged in as " + profile.getDisplayName();
+			return "Logged in as " + profile.getUsername();
 		}
 		return "Something went wrong";
 	}
