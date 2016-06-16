@@ -10,7 +10,7 @@ libraryDependencies ++= Seq(
   javaJdbc,
   cache,
   javaWs,
-  "org.pac4j" % "play-pac4j-java" % "2.1.0-SNAPSHOT",
+  "org.pac4j" % "play-pac4j" % "2.1.0",
   "org.pac4j" % "pac4j-oauth" % "1.8.3",
   "org.pac4j" % "pac4j-http" % "1.8.3"
 )
